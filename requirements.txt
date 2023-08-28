@@ -1,0 +1,29 @@
+#####################################
+#### Creación de entorno virtual ####
+#####################################
+python -m venv [nombre del entorno]
+
+# Activación de entorno virtual en Windows
+[nombre del entorno]\Scripts\activate.bat
+
+# Activación de entorno virtual en Unix o MacOS
+source [nombre del entorno]/bin/activate
+
+# Desactivación del entorno virtual
+deactivate
+
+# En caso de que no funcione el comando deactivate poner la ruta
+.\[nombre del entorno]\Scripts\deactivate
+
+#############################################
+#### Instalación de paquetes y Streamlit ####
+#############################################
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install seaborn
+
+pip install streamlit
+pip install st-pages
+pip install streamlit-option-menu
+pip install streamlit-authenticator==0.1.5
