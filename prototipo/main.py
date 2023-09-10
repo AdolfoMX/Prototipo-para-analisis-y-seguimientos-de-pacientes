@@ -11,27 +11,23 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="auto"
 )
-    
-# Autenticación del usuario
-# names = ["admin"]
-# usernames = ["admin"]
-# passwords = ["12345"]
 
-# hashed_password = stauth.Hasher(passwords).generate()
-
+# Autenticación de usuario
 names = ["admin"]
 usernames = ["admin"]
 passwords = ["12345"]
 hashed_password = ["$2b$12$nflzQj3nySx8F44R3TGpeO0DoaQraODD5MQrEa.By/Sf9n2Vc9wLK"]
 
-authenticator = stauth.Authenticate(names, usernames, hashed_password, "login SLSM", "auth", cookie_expiry_days=30)
 
-time.sleep(0.2)
-  
-name, authentication_status, username = authenticator.login("Login", "main")
+authenticator = stauth.Authenticate(names, usernames, hashed_password, "SLSM app", "auth", cookie_expiry_days=30)
+
+#time.sleep(0.2)
+
+# Inicio de sesión
+name, authentication_status, username = authenticator.login("Inicio de sesión", "main")
 
 # Verificación
-if authentication_status:  
+if st.session_state['authentication_status']:  
     
     time.sleep(0.2)
     
@@ -54,28 +50,15 @@ if authentication_status:
             """, unsafe_allow_html=True
         )
         
-        st.image("images\\mostrador.png", width=180, use_column_width=False)
+        st.image(".\\prototipo\\images\\mostrador.png", width=180, use_column_width=False)
         
         selectd = option_menu(
             menu_title="Menú principal",
-            options=
-                [
-                    "Inicio", 
-                    "Pacientes", 
-                    "Cuestionario SLSM", 
-                    "Registro de avances", 
-                    "Visualizaciones"
-                ],
-            icons= 
-                [
-                    "house", 
-                    "people",
-                    "file-medical",
-                    "percent",
-                    "bar-chart"
-                ]
+            options=["Inicio", "Pacientes", "Cuestionario SLSM", "Registro de avances", "Visualizaciones"],
+            icons=["house", "people", "file-medical", "percent", "bar-chart"]
         )
         
+        # Salir sesión
         authenticator.logout('Logout', 'main')
     
     # Secciones
@@ -95,8 +78,8 @@ if authentication_status:
     if selectd == "Visualizaciones":
         st.write(f"Haz seleccionado {selectd}")
     
-elif authentication_status is False:
+elif st.session_state['authentication_status'] is False:
     st.error('Username/password is incorrect')
     
-elif authentication_status is None:
+elif st.session_state['authentication_status'] is None:
     st.warning('Please enter your username and password')
