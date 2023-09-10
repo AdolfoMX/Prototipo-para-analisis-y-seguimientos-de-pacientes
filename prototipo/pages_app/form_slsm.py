@@ -42,7 +42,7 @@ def form_main():
                 with col2_sec1:
                     last_name = st.text_input("Apellidos")
                     number_phone = st.text_input("Número de teléfono")
-                    genre = st.radio("Género", index=2, options=["Masculino", "Femenino", "Otro"], horizontal=True)
+                    genre = st.radio("Sexo", index=2, options=["Masculino", "Femenino", "Otro"], horizontal=True)
                     st.write("")
                     weight = st.number_input('Peso', min_value=0.0, max_value=200.0, step=0.1, format="%0.1f")
                 
