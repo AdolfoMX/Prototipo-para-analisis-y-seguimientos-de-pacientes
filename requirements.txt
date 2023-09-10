@@ -24,6 +24,5 @@ pip install matplotlib
 pip install seaborn
 
 pip install streamlit
-pip install st-pages
 pip install streamlit-option-menu
 pip install streamlit-authenticator==0.1.5
