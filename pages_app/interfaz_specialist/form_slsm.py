@@ -19,11 +19,11 @@ def form_main():
         
         selectd = option_menu(
             menu_title=None,
-            options=["Historial médico", "Hoja de evolución"],
+            options=["Historial médico"],
             orientation="horizontal"
         )
         
-        # Secciones
+        # Cuestionario
         if selectd == "Historial médico":
             
             with st.form("Historial médico", clear_on_submit=True):
@@ -175,7 +175,6 @@ def form_main():
                     quest2_sec7 = st.radio("¿Ha usado fármacos para bajar de peso?", options=["Si", "No"], horizontal=False)
                     quest4_sec7 = st.radio("¿Se ha sentido culpable por su forma de beber o le critican por ello?", options=["Si", "No"], horizontal=False)
 
-
                 st.divider()
                 
                 # Sección extra
@@ -193,7 +192,3 @@ def form_main():
                     quest6_ext = st.multiselect("Seleccione sus 3 propósitos más importantes", ["1. Mejor nutrición", "2. Peso ideal", "3. Dormir mejor", "4. Dejar algún vicio", "5. Salud emocional", "6. Mejor vida social"], max_selections=3)
                 
                 submitted = st.form_submit_button("Enviar")
-                
-        if selectd == "Hoja de evolución":
-            st.write(f"Seleccionaste: {selectd}")
-        
