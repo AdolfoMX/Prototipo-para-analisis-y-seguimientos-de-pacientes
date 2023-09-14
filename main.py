@@ -1,8 +1,8 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 from streamlit_option_menu import option_menu
-from pages_app.form_slsm import form_main
 
+from pages_app.interfaz_specialist.specialist_view import specialist_view_main
 import time
 
 st.set_page_config(
@@ -30,53 +30,15 @@ name, authentication_status, username = authenticator.login("Inicio de sesión",
 if st.session_state['authentication_status']:  
     
     time.sleep(0.2)
+        
+    if "rol_logout" not in st.session_state:
+        st.session_state["rol_logout"] = authenticator
+        
+    # Interfaz del especialista
+    specialist_view_main()
     
-    with st.sidebar:
-        
-        # Inicio de código
-        st.markdown(
-            """
-            <style>
-                [data-testid=stSidebar] [data-testid=stImage]{
-                    text-align: center;
-                    display: block;
-                    margin-top: -24%;
-                    margin-bottom: 2%;
-                    margin-left: auto;
-                    margin-right: auto%;
-                    width: 100%;
-                }
-            </style>
-            """, unsafe_allow_html=True
-        )
-        
-        st.image(".\\prototipo\\images\\mostrador.png", width=180, use_column_width=False)
-        
-        selectd = option_menu(
-            menu_title="Menú principal",
-            options=["Inicio", "Pacientes", "Cuestionario SLSM", "Registro de avances", "Visualizaciones"],
-            icons=["house", "people", "file-medical", "percent", "bar-chart"]
-        )
-        
-        # Salir sesión
-        authenticator.logout('Logout', 'main')
-    
-    # Secciones
-    if selectd == "Inicio":        
-        st.write(f"Haz seleccionado {selectd}")
-
-    if selectd == "Pacientes":
-        st.write(f"Haz seleccionado {selectd}")
-        
-    if selectd == "Cuestionario SLSM":
-        # st.write(f"Haz seleccionado {selectd}")
-        form_main()
-
-    if selectd == "Registro de avances":
-        st.write(f"Haz seleccionado {selectd}")
-
-    if selectd == "Visualizaciones":
-        st.write(f"Haz seleccionado {selectd}")
+    # Interfaz de usuario
+    # Pendiente...
     
 elif st.session_state['authentication_status'] is False:
     st.error('Usuario/contraseña es incorrecto')
