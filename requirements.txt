@@ -1,0 +1,66 @@
+#####################################
+#### Creación de entorno virtual ####
+#####################################
+python -m venv [nombre del entorno]
+
+# Activación de entorno virtual en Windows
+[nombre del entorno]\Scripts\activate.bat
+
+# Activación de entorno virtual en Unix o MacOS
+source [nombre del entorno]/bin/activate
+
+# Desactivación del entorno virtual
+deactivate
+
+# En caso de que no funcione el comando deactivate poner la ruta
+.\[nombre del entorno]\Scripts\deactivate
+
+#############################################
+#### Instalación de paquetes y Streamlit ####
+#############################################
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install seaborn
+
+pip install streamlit
+pip install st-pages
+pip install streamlit-option-menu
+pip install streamlit-authenticator==0.1.5
+pip install streamlit-authenticator==0.2.2
+
+
+
+streamlit run prototipo\1_Inicio.py
+
+show_pages(
+    [
+        Page("prototipo\\1_inicio.py", "Inicio"),
+        Page(".\\prototipo\\pages\\2_Pacientes.py", "Pacientes"),
+        Page(".\\prototipo\\pages\\3_Cuestionario_del_programa.py", "Cuestionario del programa"),
+	Page(".\\prototipo\\pages\\4_Registro_de_avances.py", "Registro de avances"),
+	Page(".\\prototipo\\pages\\5_Visualizaciones.py", "Visualizaciones")
+    ]
+)
+
+hide_pages(
+    [
+        "Inicio",
+        "Pacientes",
+        "Cuestionario_del_programa",
+        "Registro_de_avances",
+        "Visualizaciones"
+    ]
+)
+
+
+import extra_streamlit_components as stx
+if st.sidebar.button("Logout"):
+        cookie_manager = stx.CookieManager()
+        cookie_manager.delete("Login SLSM", "delete")
+        
+        del st.session_state["login_state"]
+        st.session_state['logout'] = True
+        st.session_state['name'] = None
+        st.session_state['username'] = None
+        st.session_state['authentication_status'] = None
