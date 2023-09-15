@@ -1,7 +1,7 @@
 import streamlit as st
-import streamlit_authenticator as stauth
 from streamlit_option_menu import option_menu
 
+import pages_app.authenticator_user as stauth
 from pages_app.interfaz_specialist.specialist_view import specialist_view_main
 import time
 

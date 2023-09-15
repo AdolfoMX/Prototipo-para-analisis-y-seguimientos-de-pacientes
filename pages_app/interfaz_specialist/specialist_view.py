@@ -32,10 +32,10 @@ def specialist_view_main():
             menu_title="Menú principal",
             options=["Inicio", "Pacientes", "Cuestionario SLSM", "Registro de avances", "Visualizaciones"],
             icons=["house", "people", "file-medical", "percent", "bar-chart"]
-        )
+        )           
         
         # Salir sesión
-        st.session_state["rol_logout"].logout('Logout', 'main')
+        st.session_state["rol_logout"].logout('Salir de sesión', 'main')
     
     # Secciones
     if selectd == "Inicio":        
