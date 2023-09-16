@@ -1,8 +1,6 @@
 import jwt
-import yaml
 import bcrypt
 import streamlit as st
-from yaml.loader import SafeLoader
 from datetime import datetime, timedelta
 import extra_streamlit_components as stx
 import streamlit.components.v1 as components
@@ -131,6 +129,35 @@ class Authenticate:
         """
         return bcrypt.checkpw(self.password.encode(), self.passwords[self.index].encode())
     
+    def register_user(self):
+        st.markdown(
+            """
+            <style>
+                div[data-testid="stExpander"] div[role="button"] p {
+                    font-size: 1.1rem;
+                }
+            </style>
+            """, 
+            unsafe_allow_html=True
+        )
+        
+        # Agregar búsqueda y validación de usuario a como para la contraseña que coincidan
+        with st.expander("**Registrarse**"):
+            with st.form("Register", clear_on_submit=True):
+                col1_form, col2_form = st.columns(2)
+                
+                with col1_form:
+                    name = st.text_input("Nombre")
+                    email = st.text_input("Correo")
+                    password = st.text_input('Contraseña', type='password')
+                
+                with col2_form:
+                    last_name = st.text_input("Apellidos")
+                    age = st.number_input('Edad', min_value=0, max_value=110, step=1)
+                    repeat_password = st.text_input('Repetir contraseña', type='password')
+                    
+                submitted = st.form_submit_button("Registrar")
+        
     def form_login_main(self, form_name, location='main'):
         if location == 'main':
             login_form = st.form('Login')
@@ -152,6 +179,7 @@ class Authenticate:
         
             if self.index is not None:
                 try:
+                    # agregar sentencia de validación de usuario
                     if self.check_pw():
                         st.session_state['name'] = self.names[self.index]
                         self.exp_date = self.exp_date()
