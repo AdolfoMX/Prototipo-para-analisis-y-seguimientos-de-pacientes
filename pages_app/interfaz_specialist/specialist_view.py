@@ -1,9 +1,6 @@
 import streamlit as st
 
-from pages_app.interfaz_specialist.form_slsm import form_main
-from pages_app.interfaz_specialist.progress_record import progress_record_main
 from streamlit_option_menu import option_menu
-
 
 def specialist_view_main():
     with st.sidebar:
@@ -44,10 +41,10 @@ def specialist_view_main():
         st.write(f"Haz seleccionado {selectd}")
         
     if selectd == "Cuestionario SLSM":
-        form_main()
+        st.write(f"Haz seleccionado {selectd}")
 
     if selectd == "Registro de avances":
-        progress_record_main()
+        st.write(f"Haz seleccionado {selectd}")
 
     if selectd == "Visualizaciones":
         st.write(f"Haz seleccionado {selectd}")

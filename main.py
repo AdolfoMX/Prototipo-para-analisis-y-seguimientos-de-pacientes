@@ -3,6 +3,7 @@ from streamlit_option_menu import option_menu
 
 import pages_app.authenticator_user as stauth
 from pages_app.interfaz_specialist.specialist_view import specialist_view_main
+from pages_app.interfaz_patient.patient_view import patient_view_main
 
 import time
 
@@ -18,7 +19,6 @@ names = ["admin"]
 usernames = ["admin"]
 passwords = ["12345"]
 hashed_password = ["$2b$12$nflzQj3nySx8F44R3TGpeO0DoaQraODD5MQrEa.By/Sf9n2Vc9wLK"]
-
 
 authenticator = stauth.Authenticate(names, usernames, hashed_password, "SLSM app", "auth", cookie_expiry_days=30)
 
@@ -36,10 +36,10 @@ if st.session_state['authentication_status']:
         st.session_state["rol_logout"] = authenticator
         
     # Interfaz del especialista
-    specialist_view_main()
+    #specialist_view_main()
     
     # Interfaz de usuario
-    # Pendiente...
+    patient_view_main()
     
 elif st.session_state['authentication_status'] is False:
     st.error('Usuario/contraseña es incorrecto')
