@@ -38,7 +38,7 @@ if st.session_state['authentication_status']:
     # Interfaz del especialista
     #specialist_view_main()
     
-    # Interfaz de usuario
+    # Interfaz de paciente
     patient_view_main()
     
 elif st.session_state['authentication_status'] is False:
