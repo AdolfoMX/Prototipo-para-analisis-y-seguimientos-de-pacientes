@@ -160,11 +160,38 @@ class Authenticate:
                 submitted = st.form_submit_button("Registrar")
                 
     def form_login_main(self, form_name, location='main'):
+        
+        col1, col2, col3 = st.columns([1,6,1])
+        
+       
+        st.markdown(
+            """
+            <style>
+                [data-testid=stImage]{
+                    text-align: center;
+                    display: block;
+                    margin-top: -16%;
+                    margin-bottom: -3%;
+                    margin-left: auto;
+                    margin-right: auto%;
+                    width: 100%;
+                }
+                
+                h1 {
+                    text-align: center;
+                    margin-top: -3%;
+                }
+            </style>
+            """, unsafe_allow_html=True
+        )
+        st.image(".\\images\\atencion-medica.png", width=120, use_column_width=False)
+        st.title(":blue[Salud Latina Sin Medicina]")
+        
         if location == 'main':
             login_form = st.form('Login')
         elif location == 'sidebar':
             login_form = st.sidebar.form('Login')
-
+            
         login_form.subheader(form_name)
         self.username = login_form.text_input('Usuario')
         st.session_state['username'] = self.username
