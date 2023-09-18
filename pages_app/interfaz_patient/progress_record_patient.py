@@ -26,4 +26,5 @@ def progress_record_patient_main():
             st.write("En construcción...")
             
         if selectd == "Notas":
-            st.write("En construcción")
+            #st.write("En construcción")
+            st.chat_input(placeholder="Your message")

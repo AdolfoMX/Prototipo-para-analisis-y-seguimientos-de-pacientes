@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+import datetime
 
 def form_main():
     with st.container():
@@ -35,13 +36,14 @@ def form_main():
                 with col1_sec1:
                     #name = st.text_input("Nombre")
                     #email = st.text_input("Correo electrónico")
-                    age = st.number_input('Edad', min_value=0, max_value=110, step=1)
+                    date = st.date_input("Fecha de nacimiento",min_value=datetime.date(1960,1,1),format="DD/MM/YYYY")
                     height = st.number_input('Altura', min_value=0.0, max_value=3.0, format="%0.2f")
                     
                 with col2_sec1:
                     #last_name = st.text_input("Apellidos")
                     number_phone = st.text_input("Número de teléfono")
-                    genre = st.radio("Género", index=2, options=["Masculino", "Femenino", "Otro"], horizontal=True)
+                    st.write(number_phone)
+                    genre = st.radio("Sexo", index=2, options=["Masculino", "Femenino", "Otro"], horizontal=True)
                     #st.write("")
                     
                 weight = st.number_input('Peso', min_value=0.0, max_value=200.0, step=0.1, format="%0.1f")

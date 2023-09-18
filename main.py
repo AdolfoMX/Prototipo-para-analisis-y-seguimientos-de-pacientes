@@ -14,11 +14,11 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-# Autenticación de usuario
-names = ["admin"]
-usernames = ["admin"]
-passwords = ["12345"]
-hashed_password = ["$2b$12$nflzQj3nySx8F44R3TGpeO0DoaQraODD5MQrEa.By/Sf9n2Vc9wLK"]
+# Autenticación de usuarios
+names = ["admin", "adolfo"]
+usernames = ["admin", "adolfo"]
+passwords = ["12345", "12345"]
+hashed_password = ["$2b$12$nflzQj3nySx8F44R3TGpeO0DoaQraODD5MQrEa.By/Sf9n2Vc9wLK", "$2b$12$QBv5LBJOb0gg2lpyxewznuJd6CUdXWCx5njqhyevr0p20iQRD5YJG"]
 
 authenticator = stauth.Authenticate(names, usernames, hashed_password, "SLSM app", "auth", cookie_expiry_days=30)
 
@@ -34,12 +34,14 @@ if st.session_state['authentication_status']:
         
     if "rol_logout" not in st.session_state:
         st.session_state["rol_logout"] = authenticator
-        
-    # Interfaz del especialista
-    #specialist_view_main()
     
-    # Interfaz de paciente
-    patient_view_main()
+    if name == "admin":
+        # Interfaz del especialista
+        specialist_view_main()
+    
+    if name == "adolfo":
+        # Interfaz de paciente
+        patient_view_main()
     
 elif st.session_state['authentication_status'] is False:
     st.error('Usuario/contraseña es incorrecto')

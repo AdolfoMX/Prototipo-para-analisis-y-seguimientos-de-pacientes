@@ -148,11 +148,12 @@ class Authenticate:
                 
                 with col1_form:
                     name = st.text_input("Nombre")
+                    email = st.text_input("Correo")
                 
                 with col2_form:
                     last_name = st.text_input("Apellidos")
+                    rol = st.radio("Elija su Rol", index=0, options=["Especialista", "Paciente"], horizontal=True)
                     
-                email = st.text_input("Correo")
                 password = st.text_input('Contraseña', type='password')
                 repeat_password = st.text_input('Repetir contraseña', type='password')
                     

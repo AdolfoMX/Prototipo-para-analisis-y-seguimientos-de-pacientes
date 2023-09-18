@@ -19,7 +19,17 @@ def information_patient_main():
         st.title("Perfil")
         
         with st.expander("**Datos generales**"):
-            st.write("En construcción")
+            col1_genel, col2_genel = st.columns(2)
+                
+            with col1_genel:
+                name = st.text_input("Nombre")
+                email = st.text_input("Correo electrónico")
+                date = st.text_input("Fecha de nacimiento")
+                    
+            with col2_genel:
+                last_name = st.text_input("Apellidos")
+                number_phone = st.text_input("Número de teléfono")
+                genre = st.text_input("Sexo")
          
         with st.expander("**Historial médico**"):
             st.write("En construcción")
