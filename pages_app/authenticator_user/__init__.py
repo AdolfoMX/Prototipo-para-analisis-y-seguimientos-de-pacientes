@@ -141,23 +141,23 @@ class Authenticate:
             unsafe_allow_html=True
         )
         
-        # Agregar búsqueda y validación de usuario a como para la contraseña que coincidan
+        # Agregar búsqueda y validación de usuario a como también para la contraseña que coincidan
         with st.expander("**Registrarse**"):
             with st.form("Register", clear_on_submit=True):
                 col1_form, col2_form = st.columns(2)
                 
                 with col1_form:
                     name = st.text_input("Nombre")
-                    email = st.text_input("Correo")
-                    password = st.text_input('Contraseña', type='password')
                 
                 with col2_form:
                     last_name = st.text_input("Apellidos")
-                    age = st.number_input('Edad', min_value=0, max_value=110, step=1)
-                    repeat_password = st.text_input('Repetir contraseña', type='password')
+                    
+                email = st.text_input("Correo")
+                password = st.text_input('Contraseña', type='password')
+                repeat_password = st.text_input('Repetir contraseña', type='password')
                     
                 submitted = st.form_submit_button("Registrar")
-        
+                
     def form_login_main(self, form_name, location='main'):
         if location == 'main':
             login_form = st.form('Login')
