@@ -89,6 +89,8 @@ class Authenticate:
             st.session_state['username'] = None
         if 'logout' not in st.session_state:
             st.session_state['logout'] = None
+        if 'rol_login' not in st.session_state:
+            st.session_state['rol_login'] = None
 
     def token_encode(self):
         """
@@ -163,14 +165,43 @@ class Authenticate:
         )
         cursor = cnx.cursor()
         
-        sql = "INSERT INTO usuarios (nombre, apellidos, correo, rol, contrasena) VALUES (%s, %s, %s,%s, %s)"
-        val = (name.upper(), last_name.upper(), email, rol, password)
+        sql = "INSERT INTO usuarios (nombre, apellidos, correo, rol, contrasena, contrasena_hash) VALUES (%s, %s, %s, %s, %s, %s)"
+        password_hash = Hasher([password]).generate()
+        val = (name.upper(), last_name.upper(), email, rol, password, password_hash[0])
 
         cursor.execute(sql, val)
         cnx.commit()
         
         cursor.close()
         cnx.close()
+        
+    def check_email_db(self, email):
+        cnx = mysql.connector.connect(
+            user='root', 
+            password='12345',
+            host='127.0.0.1',
+            database='slsm_db'
+        )
+        
+        cursor = cnx.cursor()
+        sql = f"SELECT * FROM usuarios WHERE correo LIKE '{email}'"
+        cursor.execute(sql)
+
+        result = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+        
+        if not result:
+            return False
+        else:
+            for data in result:
+                if email == data[3]:
+                    self.names[0] = data[1]
+                    self.usernames[0] = data[3]
+                    self.passwords[0] = data[7]
+                    st.session_state['rol_login'] = data[5]
+                    return True
+            return False
         
     def register_user(self):
         st.markdown(
@@ -223,15 +254,13 @@ class Authenticate:
 
     def form_login_main(self, form_name, location='main'):
         
-        col1, col2, col3 = st.columns([1,6,1])
-        
         st.markdown(
             """
             <style>
                 [data-testid=stImage]{
                     text-align: center;
                     display: block;
-                    margin-top: -16%;
+                    margin-top: -11%;
                     margin-bottom: -3%;
                     margin-left: auto;
                     margin-right: auto%;
@@ -245,6 +274,7 @@ class Authenticate:
             </style>
             """, unsafe_allow_html=True
         )
+        
         st.image(".\\images\\atencion-medica.png", width=120, use_column_width=False)
         st.title(":blue[Salud Latina Sin Medicina]")
         
@@ -257,18 +287,16 @@ class Authenticate:
         self.username = login_form.text_input('Usuario')
         st.session_state['username'] = self.username
         self.password = login_form.text_input('Contraseña', type='password')
-        #self.names
                 
         if login_form.form_submit_button('Iniciar sesión'):
             self.index = None
+            if self.check_email_db(self.username):
+                for i in range(0, len(self.usernames)):
+                    if self.usernames[i] == self.username:
+                        self.index = i
             
-            for i in range(0, len(self.usernames)):
-                if self.usernames[i] == self.username:
-                    self.index = i
-        
             if self.index is not None:
                 try:
-                    # agregar sentencia de validación de usuario
                     if self.check_pw():
                         st.session_state['name'] = self.names[self.index]
                         self.exp_date = self.exp_date()
@@ -320,7 +348,7 @@ class Authenticate:
             if st.session_state['authentication_status'] != True:
                 self.form_login_main(form_name, location)
 
-        return st.session_state['name'], st.session_state['authentication_status'], st.session_state['username']
+        return st.session_state['name'], st.session_state['authentication_status'], st.session_state['username'], st.session_state['rol_login']
 
     def logout(self, button_name, location='main'):
         """Creates a logout button.

@@ -20,12 +20,12 @@ usernames = ["admin", "adolfo"]
 passwords = ["12345", "12345"]
 hashed_password = ["$2b$12$nflzQj3nySx8F44R3TGpeO0DoaQraODD5MQrEa.By/Sf9n2Vc9wLK", "$2b$12$QBv5LBJOb0gg2lpyxewznuJd6CUdXWCx5njqhyevr0p20iQRD5YJG"]
 
-authenticator = stauth.Authenticate(names, usernames, hashed_password, "SLSM app", "auth", cookie_expiry_days=30)
+authenticator = stauth.Authenticate([""], [""], [""], "SLSM app", "auth", cookie_expiry_days=30)
 
 #time.sleep(0.2)
 
 # Inicio de sesión
-name, authentication_status, username = authenticator.login("Inicio de sesión", "main")
+name, authentication_status, username, rol_login = authenticator.login("Inicio de sesión", "main")
 
 # Verificación
 if st.session_state['authentication_status']:  
@@ -35,11 +35,11 @@ if st.session_state['authentication_status']:
     if "rol_logout" not in st.session_state:
         st.session_state["rol_logout"] = authenticator
     
-    if name == "admin":
+    if rol_login == "Especialista":
         # Interfaz del especialista
         specialist_view_main()
     
-    if name == "adolfo":
+    if rol_login == "Paciente":
         # Interfaz de paciente
         patient_view_main()
     
