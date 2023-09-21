@@ -1,7 +1,9 @@
 import jwt
 import bcrypt
-import streamlit as st
+import mysql.connector
 from datetime import datetime, timedelta
+
+import streamlit as st
 import extra_streamlit_components as stx
 import streamlit.components.v1 as components
 
@@ -129,6 +131,47 @@ class Authenticate:
         """
         return bcrypt.checkpw(self.password.encode(), self.passwords[self.index].encode())
     
+    def check_user_db(self, email):
+        cnx = mysql.connector.connect(
+            user='root', 
+            password='12345',
+            host='127.0.0.1',
+            database='slsm_db'
+        )
+        cursor = cnx.cursor()
+        sql = f"SELECT * FROM usuarios WHERE correo LIKE '{email}'"
+        cursor.execute(sql)
+
+        result = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+        
+        if not result:
+            return False
+        else:
+            for data in result:
+                if email == data[3]:
+                    return True
+            return False
+        
+    def add_user_db(self, name, last_name, email, rol, password):
+        cnx = mysql.connector.connect(
+            user='root', 
+            password='12345',
+            host='127.0.0.1',
+            database='slsm_db'
+        )
+        cursor = cnx.cursor()
+        
+        sql = "INSERT INTO usuarios (nombre, apellidos, correo, rol, contrasena) VALUES (%s, %s, %s,%s, %s)"
+        val = (name.upper(), last_name.upper(), email, rol, password)
+
+        cursor.execute(sql, val)
+        cnx.commit()
+        
+        cursor.close()
+        cnx.close()
+        
     def register_user(self):
         st.markdown(
             """
@@ -152,18 +195,36 @@ class Authenticate:
                 
                 with col2_form:
                     last_name = st.text_input("Apellidos")
-                    rol = st.radio("Elija su Rol", index=0, options=["Especialista", "Paciente"], horizontal=True)
+                    rol = st.radio("Se esta registrando como:", index=0, options=["Especialista", "Paciente"], horizontal=True)
                     
                 password = st.text_input('Contraseña', type='password')
                 repeat_password = st.text_input('Repetir contraseña', type='password')
-                    
-                submitted = st.form_submit_button("Registrar")
+                data_form = [name, last_name, email, password, repeat_password]
                 
+                if st.form_submit_button("Registrar"):
+                    
+                    # verifica que los campos esten llenos
+                    if "" in data_form:
+                        st.error("Por favor asegurese de llenar todos los campos")
+                    else:
+                        
+                        # verifica si las contraseñas son iguales
+                        if password == repeat_password:
+                            if not self.check_user_db(email):
+                                
+                                # registro de datos a la base de datos
+                                self.add_user_db(name, last_name, email, rol, password)
+                                st.success("Felicidades, el registro ha sido exítoso!")
+                                
+                            else:
+                                st.error("Esta cuenta ya existe con el mismo correo")
+                        else:
+                            st.error("Por favor asegurese de que la contraseña coincida")
+
     def form_login_main(self, form_name, location='main'):
         
         col1, col2, col3 = st.columns([1,6,1])
         
-       
         st.markdown(
             """
             <style>

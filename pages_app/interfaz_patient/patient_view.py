@@ -31,7 +31,7 @@ def patient_view_main():
         
         selectd = option_menu(
             menu_title="Menú principal",
-            options=["Inicio", "Información", "Cuestionario SLSM", "Registro de avances", "Visualizaciones"],
+            options=["Inicio", "Información", "Cuestionario SLSM", "Registro de avances", "Resultados"],
             icons=["house", "file-earmark-person", "file-medical", "percent", "bar-chart"]
         )           
         
