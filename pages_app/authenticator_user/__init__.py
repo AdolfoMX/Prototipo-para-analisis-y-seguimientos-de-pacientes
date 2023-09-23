@@ -269,7 +269,7 @@ class Authenticate:
                 
                 h1 {
                     text-align: center;
-                    margin-top: -3%;
+                    margin-top: -2%;
                 }
             </style>
             """, unsafe_allow_html=True
