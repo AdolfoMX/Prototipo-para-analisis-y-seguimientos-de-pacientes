@@ -33,12 +33,12 @@ if st.session_state['authentication_status']:
     if "rol_logout" not in st.session_state:
         st.session_state["rol_logout"] = authenticator
     
-    if rol_login == "Especialista":
+    if rol_login == 1:
         # Interfaz del especialista
         time.sleep(0.08)
         specialist_view_main()
     
-    if rol_login == "Paciente":
+    if rol_login == 2:
         # Interfaz de paciente
         time.sleep(0.08)
         patient_view_main()

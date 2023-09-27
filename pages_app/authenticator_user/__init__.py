@@ -165,9 +165,15 @@ class Authenticate:
         )
         cursor = cnx.cursor()
         
-        sql = "INSERT INTO usuarios (nombre, apellidos, correo, rol, contrasena, contrasena_hash) VALUES (%s, %s, %s, %s, %s, %s)"
+        if rol == "Especialista":
+            rol_id = 1
+        
+        if rol == "Paciente":
+            rol_id = 2
+            
         password_hash = Hasher([password]).generate()
-        val = (name.upper(), last_name.upper(), email, rol, password, password_hash[0])
+        sql = "INSERT INTO usuarios (nombre, apellidos, correo, rol, contrasena, contrasena_hash) VALUES (%s, %s, %s, %s, %s, %s)"
+        val = (name.upper(), last_name.upper(), email, rol_id, password, password_hash[0])
 
         cursor.execute(sql, val)
         cnx.commit()
@@ -198,8 +204,8 @@ class Authenticate:
                 if email == data[3]:
                     self.names[0] = data[1]
                     self.usernames[0] = data[3]
-                    self.passwords[0] = data[7]
-                    st.session_state['rol_login'] = data[5]
+                    self.passwords[0] = data[6]
+                    st.session_state['rol_login'] = data[4]
                     return True
             return False
         
