@@ -101,7 +101,8 @@ class Authenticate:
         """
         return jwt.encode({'name':st.session_state['name'],
         'username':st.session_state['username'],
-        'exp_date':self.exp_date}, self.key, algorithm='HS256')
+        'exp_date':self.exp_date,
+        'rol_login':st.session_state['rol_login']}, self.key, algorithm='HS256')
 
     def token_decode(self):
         """
@@ -172,7 +173,7 @@ class Authenticate:
             rol_id = 2
             
         password_hash = Hasher([password]).generate()
-        sql = "INSERT INTO usuarios (nombre, apellidos, correo, rol, contrasena, contrasena_hash) VALUES (%s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO usuarios (nombre, apellidos, correo, id_rol, contrasena, contrasena_hash) VALUES (%s, %s, %s, %s, %s, %s)"
         val = (name.upper(), last_name.upper(), email, rol_id, password, password_hash[0])
 
         cursor.execute(sql, val)
@@ -350,7 +351,8 @@ class Authenticate:
                                 st.session_state['name'] = self.token['name']
                                 st.session_state['username'] = self.token['username']
                                 st.session_state['authentication_status'] = True
-
+                                st.session_state['rol_login'] = self.token['rol_login']
+            
             if st.session_state['authentication_status'] != True:
                 self.form_login_main(form_name, location)
 

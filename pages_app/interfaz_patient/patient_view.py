@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+from pages_app.interfaz_patient.home_patient import home_patient
 from pages_app.interfaz_patient.form_slsm import form_main
 from pages_app.interfaz_patient.information_patient import information_patient_main
 from pages_app.interfaz_patient.visualizations_patient import visualizations_patient_main
@@ -31,7 +32,7 @@ def patient_view_main():
         
         selectd = option_menu(
             menu_title="Menú principal",
-            options=["Inicio", "Información", "Cuestionario SLSM", "Registro de avances", "Resultados"],
+            options=["Inicio", "Acerca de mi", "Cuestionario SLSM", "Registro de avances", "Resultados"],
             icons=["house", "file-earmark-person", "file-medical", "percent", "bar-chart"]
         )           
         
@@ -39,10 +40,11 @@ def patient_view_main():
         st.session_state["rol_logout"].logout('Salir de sesión', 'main')
     
     # Secciones
-    if selectd == "Inicio":        
-        st.write(f"Haz seleccionado {selectd}")
+    if selectd == "Inicio":
+        home_patient()        
+        #st.write(f"Haz seleccionado {selectd}") 
 
-    if selectd == "Información":
+    if selectd == "Acerca de mi":
         information_patient_main()
         
     if selectd == "Cuestionario SLSM":

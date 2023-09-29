@@ -32,8 +32,8 @@ def progress_record_patient_main():
                 col1_sec1, col2_sec1 = st.columns(2)
 
                 with col1_sec1:
-                    quest1_sec1 = st.slider("Indique del 1 al 10 cómo se siente físicamente tras la última sesión: ", 0,10,1)
-                    st.write("Puntaje: ", quest1_sec1)
+                    quest1_sec1 = st.slider("Indique del 1 al 10 cómo se siente físicamente tras la última sesión: ", 0,10,5)
+                    #st.write("Puntaje: ", quest1_sec1)
 
                 with col2_sec1:
                     notes1_sec1 = st.text_area("¿Cómo se sintió físicamente?", max_chars=200)
@@ -47,7 +47,7 @@ def progress_record_patient_main():
                 
                 
                 with col1_sec2:
-                    quest1_sec2 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su salud", 0,10,1)
+                    quest1_sec2 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su salud", 0,10,5)
                     #st.write("Puntaje: ", quest1_sec2)
                 
                 with col2_sec2:
@@ -61,7 +61,7 @@ def progress_record_patient_main():
                 col1_sec3, col2_sec3 = st.columns(2)
                 
                 with col1_sec3:
-                    quest1_sec3 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su salud mental", 0,10,1)
+                    quest1_sec3 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su salud mental", 0,10,5)
                     #st.write("Puntaje: ", quest1_sec3)
                 
                 with col2_sec3:
@@ -76,7 +76,7 @@ def progress_record_patient_main():
                 
                 
                 with col1_sec4:
-                    quest1_sec4 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su conciliación del sueño", 0,10,1)
+                    quest1_sec4 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su conciliación del sueño", 0,10,5)
                     #st.write("Puntaje: ", quest1_sec4)
                 
                 with col2_sec4:
@@ -91,7 +91,7 @@ def progress_record_patient_main():
                 
                 
                 with col1_sec5:
-                    quest1_sec5 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su alimentación", 0,10,1)
+                    quest1_sec5 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su alimentación", 0,10,5)
                     #st.write("Puntaje: ", quest1_sec4)
                 
                 with col2_sec5:
@@ -106,7 +106,7 @@ def progress_record_patient_main():
                 
                 
                 with col1_sec6:
-                    quest1_sec6 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en las adicciones y/o consumo (tabaco y/o alcohol)", 0,10,1)
+                    quest1_sec6 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en las adicciones y/o consumo (tabaco y/o alcohol)", 0,10,5)
                     #st.write("Puntaje: ", quest1_sec4)
                 
                 with col2_sec6:

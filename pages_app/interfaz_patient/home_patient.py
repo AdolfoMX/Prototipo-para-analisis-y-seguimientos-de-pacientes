@@ -1,6 +1,6 @@
 import streamlit as st
 
-def patients_main():
+def home_patient():
     with st.container():
         st.markdown(
             """
@@ -8,8 +8,9 @@ def patients_main():
                 .css-1y4p8pa {
                     margin-top: -6rem;
                 }
-            </style>
             """, unsafe_allow_html=True
         )
         
-        st.title("Información de pacientes")
+        st.title("Perfil")
+        
+        

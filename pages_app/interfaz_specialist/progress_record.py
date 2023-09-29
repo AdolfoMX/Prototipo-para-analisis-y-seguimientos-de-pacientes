@@ -23,8 +23,20 @@ def progress_record_main():
         
         # Cuestionario
         if selectd == "Hoja de evolución":
-            st.write("En construcción...")
-            
+
+            with st.form("Hoja de evolución", clear_on_submit=True):
+                col1_sec1, col2_sec1 = st.columns(2)
+
+                with col1_sec1:
+                    weight = st.number_input('Peso', min_value=0.0, max_value=3.0, format="%0.2f")
+                    IMC = st.number_input('Índice de masa corporal', min_value=0.0, max_value=3.0, format="%0.2f")
+                
+                with col2_sec1:
+                    size = st.number_input('Talla', min_value=0.0, max_value=3.0, format="%0.2f")
+                    body_fat = st.number_input('Porcentaje de grasa corporal', min_value=0.0, max_value=3.0, format="%0.2f")
+
+                submitted = st.form_submit_button("Enviar")
+
         if selectd == "Notas":
             st.write("En construcción")
         

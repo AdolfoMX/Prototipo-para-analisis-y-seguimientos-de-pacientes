@@ -9,18 +9,14 @@ import time
 
 st.set_page_config(
     page_title="SLSM app",
-    page_icon=":hospital:",
+    page_icon=".\\images\\latido-del-corazon.png",
     layout="centered",
     initial_sidebar_state="auto"
 )
 
 # Autenticación de usuarios
-names = ["admin", "adolfo"]
-usernames = ["admin", "adolfo"]
-passwords = ["12345", "12345"]
-hashed_password = ["$2b$12$nflzQj3nySx8F44R3TGpeO0DoaQraODD5MQrEa.By/Sf9n2Vc9wLK", "$2b$12$QBv5LBJOb0gg2lpyxewznuJd6CUdXWCx5njqhyevr0p20iQRD5YJG"]
 
-authenticator = stauth.Authenticate([""], [""], [""], "SLSM app", "auth", cookie_expiry_days=30)
+authenticator = stauth.Authenticate([""], [""], [""], "SLSM app", "auth", cookie_expiry_days=2)
 
 #time.sleep(0.2)
 
@@ -29,18 +25,17 @@ name, authentication_status, username, rol_login = authenticator.login("Inicio d
 
 # Verificación
 if st.session_state['authentication_status']:  
-        
+    time.sleep(0.08)
+    
     if "rol_logout" not in st.session_state:
         st.session_state["rol_logout"] = authenticator
     
     if rol_login == 1:
         # Interfaz del especialista
-        time.sleep(0.08)
         specialist_view_main()
     
     if rol_login == 2:
         # Interfaz de paciente
-        time.sleep(0.08)
         patient_view_main()
     
 elif st.session_state['authentication_status'] is False:

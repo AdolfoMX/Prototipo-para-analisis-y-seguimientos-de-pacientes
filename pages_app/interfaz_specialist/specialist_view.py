@@ -7,7 +7,6 @@ from pages_app.interfaz_specialist.progress_record import progress_record_main
 
 def specialist_view_main():
     with st.sidebar:
-        
         # Inicio de código
         st.markdown(
             """
