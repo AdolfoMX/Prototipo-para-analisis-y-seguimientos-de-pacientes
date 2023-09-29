@@ -53,11 +53,11 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(80) DEFAULT NULL,
   `apellidos` varchar(80) DEFAULT NULL,
   `correo` varchar(80) DEFAULT NULL,
-  `rol` int DEFAULT NULL,
+  `id_rol` int DEFAULT NULL,
   `contrasena` varchar(100) DEFAULT NULL,
   `contrasena_hash` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'GUADALUPE','GUINTO','guadalupe.guinto@gmail.com',2,'12345','$2b$12$NffuYu0ZnORLiM/PObslrugmyRsFz0V8sPArMW2HK7Lu3VYawhb7.'),(2,'AMAYRANI','GOMEZ','170300079@ucaribe.edu.mx',1,'12345','$2b$12$q1ROBA.geON5Ll9PvyD.ROHVtBTqyKXwEfSPzeIFZb.vz2PiKUAEm');
+INSERT INTO `usuarios` VALUES (1,'GUADALUPE','GUINTO','guadalupe.guinto@gmail.com',2,'12345','$2b$12$NffuYu0ZnORLiM/PObslrugmyRsFz0V8sPArMW2HK7Lu3VYawhb7.'),(2,'AMAYRANI','GOMEZ','170300079@ucaribe.edu.mx',1,'12345','$2b$12$q1ROBA.geON5Ll9PvyD.ROHVtBTqyKXwEfSPzeIFZb.vz2PiKUAEm'),(3,'ADOLFO ','TUN DZUL','170300124@ucaribe.edu.mx',2,'12345','$2b$12$7dYcrIuYsYl8Rg769cLTzeL0WHxbsq5RBuWsq1JuLqd8UmozirYD2');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,4 +87,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-26 21:16:55
+-- Dump completed on 2023-09-29 17:06:13
