@@ -53,5 +53,5 @@ def patient_view_main():
     if selectd == "Registro de avances":
         progress_record_patient_main()
 
-    if selectd == "Visualizaciones":
+    if selectd == "Resultados":
         visualizations_patient_main()

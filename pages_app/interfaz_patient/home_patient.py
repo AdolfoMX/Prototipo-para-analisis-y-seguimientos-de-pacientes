@@ -12,5 +12,12 @@ def home_patient():
         )
         
         st.title("Perfil")
+
+        #name = st.write(st.session_state['name'])
+        st.write("¡ Bienvenido, ", st.session_state.name,"!")
+
+        #if st.experimental_user.name:
+            
+        #    name = get_name_from_db(st.experimental_user.name)
         
         
