@@ -91,6 +91,9 @@ class Authenticate:
             st.session_state['logout'] = None
         if 'rol_login' not in st.session_state:
             st.session_state['rol_login'] = None
+        if 'id_user' not in st.session_state:
+            st.session_state['id_user'] = None
+            
 
     def token_encode(self):
         """
@@ -102,7 +105,8 @@ class Authenticate:
         return jwt.encode({'name':st.session_state['name'],
         'username':st.session_state['username'],
         'exp_date':self.exp_date,
-        'rol_login':st.session_state['rol_login']}, self.key, algorithm='HS256')
+        'rol_login':st.session_state['rol_login'],
+        'id_user':st.session_state['id_user']}, self.key, algorithm='HS256')
 
     def token_decode(self):
         """
@@ -203,6 +207,7 @@ class Authenticate:
         else:
             for data in result:
                 if email == data[3]:
+                    st.session_state['id_user'] = data[0]
                     self.names[0] = data[1]
                     self.usernames[0] = data[3]
                     self.passwords[0] = data[6]
@@ -352,6 +357,7 @@ class Authenticate:
                                 st.session_state['username'] = self.token['username']
                                 st.session_state['authentication_status'] = True
                                 st.session_state['rol_login'] = self.token['rol_login']
+                                st.session_state['id_user'] = self.token['id_user']
             
             if st.session_state['authentication_status'] != True:
                 self.form_login_main(form_name, location)

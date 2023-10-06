@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+import datetime as dt
+
 def progress_record_patient_main():
     with st.container():
         st.markdown(
@@ -23,10 +25,11 @@ def progress_record_patient_main():
         
         # Cuestionario
         if selectd == "Hoja de evolución":
-            #st.write("En construcción...")
             
             with st.form("Historial médico", clear_on_submit=True):
-            
+                current_date = dt.date.today()
+                date_now = st.text_input(":blue[Fecha de registro]", value=current_date.strftime("%d/%m/%y"), disabled=True)
+                
                 # Sección 1 de preguntas
                 st.subheader("Sección 1. Salud física")
                 col1_sec1, col2_sec1 = st.columns(2)
@@ -37,7 +40,8 @@ def progress_record_patient_main():
 
                 with col2_sec1:
                     notes1_sec1 = st.text_area("¿Cómo se sintió físicamente?", max_chars=200)
-                    notes2_sec1 = st.text_area("¿Notó mejoras?", max_chars=200)
+                
+                notes2_sec1 = st.text_area("¿Notó mejoras?", max_chars=200)
 
                 st.divider()
 
@@ -52,7 +56,8 @@ def progress_record_patient_main():
                 
                 with col2_sec2:
                     notes1_sec2 = st.text_area("¿Cómo se sintió respecto a su salud?", max_chars=200)
-                    notes2_sec2 = st.text_area("¿Notó mejoras? ", max_chars=200)
+                
+                notes2_sec2 = st.text_area("¿Notó mejoras? ", max_chars=200)
                 
                 st.divider()
 
@@ -66,7 +71,8 @@ def progress_record_patient_main():
                 
                 with col2_sec3:
                     notes1_sec3 = st.text_area("¿Cómo se sintió respecto a su salud mental?", max_chars=200)
-                    notes2_sec3 = st.text_area("¿Notó mejoras?  ", max_chars=200)
+                
+                notes2_sec3 = st.text_area("¿Notó mejoras?  ", max_chars=200)
                 
                 st.divider()
 
@@ -81,7 +87,8 @@ def progress_record_patient_main():
                 
                 with col2_sec4:
                     notes1_sec4 = st.text_area("¿Cómo se sintió respecto a su sueño?", max_chars=200)
-                    notes2_sec4 = st.text_area("¿Notó mejoras?   ", max_chars=200)
+                
+                notes2_sec4 = st.text_area("¿Notó mejoras?   ", max_chars=200)
                 
                 st.divider()
 
@@ -89,14 +96,14 @@ def progress_record_patient_main():
                 st.subheader("Sección 5. Alimentación")
                 col1_sec5, col2_sec5 = st.columns(2)
                 
-                
                 with col1_sec5:
                     quest1_sec5 = st.slider("Indique del 1 al 10 cuánto considera que ha progresado en su alimentación", 0,10,5)
                     #st.write("Puntaje: ", quest1_sec4)
                 
                 with col2_sec5:
                     notes1_sec5 = st.text_area("¿Cómo se sintió respecto a su alimentación?", max_chars=200)
-                    notes2_sec5 = st.text_area("¿Notó mejoras?     ", max_chars=200)
+                
+                notes2_sec5 = st.text_area("¿Notó mejoras?     ", max_chars=200)
                 
                 st.divider()
 
@@ -111,7 +118,8 @@ def progress_record_patient_main():
                 
                 with col2_sec6:
                     notes1_sec6 = st.text_area("¿Cómo se sintió respecto al consumo y/o adicciones?", max_chars=200)
-                    notes2_sec6 = st.text_area("¿Notó mejoras?      ", max_chars=200)
+                
+                notes2_sec6 = st.text_area("¿Notó mejoras?      ", max_chars=200)
                 
                 st.divider()
 
@@ -123,3 +131,43 @@ def progress_record_patient_main():
                 st.divider()
                     
                 submitted = st.form_submit_button("Enviar")
+
+
+"""
+date_now = [DATE]
+
+# Sección 1 de preguntas
+quest1_sec1 = [INT]
+notes1_sec1 = [VARCHAR lim 200]
+notes2_sec1 = [VARCHAR lim 200]
+
+
+# Sección 2 de preguntas
+quest1_sec2 = [INT]
+notes1_sec2 = [VARCHAR lim 200]
+notes2_sec2 = [VARCHAR lim 200]
+
+
+# Sección 3 de preguntas
+quest1_sec3 = [INT]
+notes1_sec3 = [VARCHAR lim 200]
+notes2_sec3 = [VARCHAR lim 200]
+
+
+# Sección 4 de preguntas
+quest1_sec4 = [INT]
+notes1_sec4 = [VARCHAR lim 200]
+notes2_sec4 = [VARCHAR lim 200]
+
+
+# Sección 5 de preguntas
+quest1_sec5 = [INT]
+notes1_sec5 = [VARCHAR lim 200]
+notes2_sec5 = [VARCHAR lim 200]
+
+# Sección 6 de preguntas
+quest1_sec6 = [INT]
+notes1_sec6 = [VARCHAR lim 200]
+notes2_sec6 = [VARCHAR lim 200]
+quest1_sec7 = [VARCHAR lim 200]
+"""

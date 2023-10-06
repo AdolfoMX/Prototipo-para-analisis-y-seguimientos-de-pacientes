@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import datetime
+
+import datetime as dt
 
 def form_main():
     with st.container():
@@ -26,25 +27,22 @@ def form_main():
         
         # Cuestionario
         if selectd == "Historial médico":
-            
             with st.form("Historial médico", clear_on_submit=True):
+                
+                current_date = dt.date.today()
+                date_now = st.text_input(":blue[Fecha de registro]", value=current_date.strftime("%d/%m/%y"), disabled=True)
                 
                 # Sección 1 de preguntas
                 st.subheader("Sección 1. Datos generales del paciente")
                 col1_sec1, col2_sec1 = st.columns(2)
                 
                 with col1_sec1:
-                    #name = st.text_input("Nombre")
-                    #email = st.text_input("Correo electrónico")
-                    date = st.date_input("Fecha de nacimiento",min_value=datetime.date(1960,1,1),format="DD/MM/YYYY")
+                    date = st.date_input("Fecha de nacimiento",min_value=dt.date(1960,1,1),format="DD/MM/YYYY")
                     height = st.number_input('Altura', min_value=0.0, max_value=3.0, format="%0.2f")
                     
                 with col2_sec1:
-                    #last_name = st.text_input("Apellidos")
                     number_phone = st.text_input("Número de teléfono")
-                    st.write(number_phone)
                     genre = st.radio("Sexo", index=2, options=["Masculino", "Femenino", "Otro"], horizontal=True)
-                    #st.write("")
                     
                 weight = st.number_input('Peso', min_value=0.0, max_value=200.0, step=0.1, format="%0.1f")
                 
@@ -97,6 +95,7 @@ def form_main():
                     quest12_sec3 = st.text_area("¿Qué complicaciones ha tenido por la enfermedad cardíaca?", max_chars=200)
                     quest14_sec3 = st.number_input("¿Cuántos años lleva padeciendo la enfermedad cerebral?", min_value=0, max_value=100, step=1)
                     quest16_sec3 = st.text_area("¿Qué complicaciones ha tenido por la enfermedad cerebral?", max_chars=200)
+                
                 quest17_sec3 = st.text_area("¿Qué otras enfermedades crónicas ha tenido?", max_chars=200)
                     
                 st.divider()
@@ -195,3 +194,109 @@ def form_main():
                     quest6_ext = st.multiselect("Seleccione sus 3 propósitos más importantes", ["1. Mejor nutrición", "2. Peso ideal", "3. Dormir mejor", "4. Dejar algún vicio", "5. Salud emocional", "6. Mejor vida social"], max_selections=3)
                 
                 submitted = st.form_submit_button("Enviar")
+                
+
+"""
+# Sección 1 de preguntas
+date = [DATE]
+height = [FLOAT]
+number_phone = [VARCHAR lim 20]
+genre = [VARCHAR lim 2]
+weight = [FLOAT]
+                
+                
+# Sección 2 de preguntas
+quest1_sec2 = [VARCHAR  lim 2]
+quest2_sec2 = [INT]
+quest3_sec2 = [VARCHAR lim 2]
+quest4_sec2 = [FLOAT]
+quest5_sec2 = [INT]
+quest6_sec2 = [VARCHAR lim 2]
+quest7_sec2 = [VARCHAR lim 200]
+quest8_sec2 = [INT]
+quest9_sec2 = [INT]
+quest10_sec2 = [VARCHAR lim 200]
+quest11_sec2 = [VARCHAR lim 200]
+quest12_sec2 = [VARCHAR lim 200]
+quest13_sec2 = [VARCHAR lim 200]
+
+
+# Sección 3 de preguntas
+quest1_sec3 = [VARCHAR lim 2]
+quest2_sec3 = [INT]
+quest3_sec3 = [VARCHAR lim 2]
+quest4_sec3 = [VARCHAR lim 200]
+quest5_sec3 = [VARCHAR lim 2]
+quest6_sec3 = [INT]
+quest7_sec3 = [VARCHAR lim 2]
+quest8_sec3 = [VARCHAR lim 200]
+quest9_sec3 = [VARCHAR lim 2]
+quest10_sec3 = [INT]
+quest11_sec3 = [VARCHAR lim 2]
+quest12_sec3 = [VARCHAR lim 200]
+quest13_sec3 = [VARCHAR lim 2]
+quest14_sec3 = [INT]
+quest15_sec3 = [VARCHAR lim 2]
+quest16_sec3 = [VARCHAR lim 200]
+quest17_sec3 = [VARCHAR lim 200]
+
+
+# Sección 4 de preguntas
+quest1_sec4 = [VARCHAR lim 2]
+quest2_sec4 = [VARCHAR lim 2]
+quest3_sec4 = [VARCHAR lim 2]
+quest4_sec4 = [VARCHAR lim 2]
+quest5_sec4 = [VARCHAR lim 200]
+quest6_sec4 = [VARCHAR lim 2]
+quest7_sec4 = [VARCHAR lim 2]
+quest8_sec4 = [VARCHAR lim 2]
+quest9_sec4 = [VARCHAR lim 2]
+quest10_sec4 = [VARCHAR lim 2]
+quest11_sec4 = [VARCHAR lim 2]
+quest12_sec4 = [VARCHAR lim 2]
+quest13_sec4 = [VARCHAR lim 2]
+quest14_sec4 = [VARCHAR lim 200]
+quest15_sec4 = [VARCHAR lim 2]
+quest16_sec4 = [VARCHAR lim 2]
+quest17_sec4 = [VARCHAR lim 2]
+quest18_sec4 = [VARCHAR lim 2]
+quest19_sec4 = [VARCHAR lim 2]
+quest20_sec4 = [VARCHAR lim 2]
+quest21_sec4 = [VARCHAR lim 2]
+quest22_sec4 = [VARCHAR lim 200]
+
+
+# Sección 5 de preguntas
+quest1_sec5 = [VARCHAR lim 2]
+quest2_sec5 = [VARCHAR lim 200]
+quest3_sec5 = [VARCHAR lim 2]
+quest4_sec5 = [VARCHAR lim 40]
+quest5_sec5 = [VARCHAR lim 2]
+quest6_sec5 = [VARCHAR lim 2]
+quest7_sec5 = [VARCHAR lim 30]
+
+
+# Sección 6 de preguntas
+quest1_sec6 = [INT]
+quest2_sec6 = [VARCHAR lim 15]
+quest3_sec6 = [VARCHAR lim 2]
+quest4_sec6 = [VARCHAR lim 2]
+quest5_sec6 = [VARCHAR lim 2]
+quest6_sec6 = [VARCHAR lim 2]
+
+
+# Sección 7 de preguntas
+quest1_sec7 = [VARCHAR lim 2]
+quest2_sec7 = [VARCHAR lim 2]
+quest3_sec7 = [VARCHAR lim 200]
+quest4_sec7 = [VARCHAR lim 2]
+
+
+# Sección extra
+quest1_ext = [VARCHAR lim 2]
+quest2_ext = [VARCHAR lim 200]
+quest3_ext = [VARCHAR lim 2]
+quest4_ext = [VARCHAR lim 200]
+quest5_ext = [VARCHAR lim 2]
+quest6_ext = [VARCHAR lim 22]
+"""
