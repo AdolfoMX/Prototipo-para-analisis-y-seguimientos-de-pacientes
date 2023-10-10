@@ -145,8 +145,9 @@ class Authenticate:
             host='127.0.0.1',
             database='slsm_db'
         )
+        
         cursor = cnx.cursor()
-        sql = f"SELECT * FROM usuarios WHERE correo LIKE '{email}'"
+        sql = f"SELECT * FROM usuarios WHERE correo LIKE '%{email}%'"
         cursor.execute(sql)
 
         result = cursor.fetchall()
@@ -238,7 +239,7 @@ class Authenticate:
                 
                 with col2_form:
                     last_name = st.text_input("Apellidos")
-                    rol = st.radio("Se esta registrando como:", index=0, options=["Especialista", "Paciente"], horizontal=True)
+                    rol = st.radio("Se está registrando como:", index=0, options=["Especialista", "Paciente"], horizontal=True)
                     
                 password = st.text_input('Contraseña', type='password')
                 repeat_password = st.text_input('Repetir contraseña', type='password')

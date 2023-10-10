@@ -7,6 +7,9 @@ from pages_app.interfaz_patient.patient_view import patient_view_main
 
 import time
 
+import warnings
+warnings.filterwarnings("ignore")
+
 st.set_page_config(
     page_title="SLSM app",
     page_icon=".\\images\\latido-del-corazon.png",

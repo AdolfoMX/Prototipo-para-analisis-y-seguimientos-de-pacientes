@@ -26,7 +26,7 @@ CREATE TABLE historiales_medicos (
     fecha_nacimiento DATE,
     altura FLOAT,
     numero_telefono VARCHAR(20),
-    genero VARCHAR(2),
+    genero VARCHAR(15),
     peso FLOAT,
     pregunta1_sec2 VARCHAR(2),
     pregunta2_sec2 INT,
@@ -86,9 +86,9 @@ CREATE TABLE historiales_medicos (
     pregunta4_sec5 VARCHAR(40),
     pregunta5_sec5 VARCHAR(2),
     pregunta6_sec5 VARCHAR(2),
-    pregunta7_sec5 VARCHAR(30),
+    pregunta7_sec5 VARCHAR(40),
     pregunta1_sec6 INT,
-    pregunta2_sec6 VARCHAR(15),
+    pregunta2_sec6 VARCHAR(40),
     pregunta3_sec6 VARCHAR(2),
     pregunta4_sec6 VARCHAR(2),
     pregunta5_sec6 VARCHAR(2),
@@ -102,7 +102,7 @@ CREATE TABLE historiales_medicos (
     pregunta3_ext VARCHAR(2),
     pregunta4_ext VARCHAR(200),
     pregunta5_ext VARCHAR(2),
-    pregunta6_ext VARCHAR(22),
+    pregunta6_ext VARCHAR(40),
     PRIMARY KEY(id_historial) 
 );
 
@@ -168,9 +168,14 @@ SHOW TABLES;
 INSERT INTO roles (nombre_rol)
 VALUES ('Especialista'), ('Paciente');
 
+/*Eliminar una fila
+DELETE FROM `slsm_db`.`usuarios` WHERE (`id_usuario` = '7');
+*/
+
 /*Consulta*/
-SELECT * FROM usuarios;
+SELECT * FROM usuarios;	
 SELECT * FROM roles;
+SELECT * FROM historiales_medicos;
 
 SELECT 
 	usuarios.id_usuario,

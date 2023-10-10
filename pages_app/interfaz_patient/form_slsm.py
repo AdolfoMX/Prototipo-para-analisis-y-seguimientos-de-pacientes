@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+import mysql.connector
 import datetime as dt
 
 def form_main():
@@ -28,10 +29,7 @@ def form_main():
         # Cuestionario
         if selectd == "Historial médico":
             with st.form("Historial médico", clear_on_submit=True):
-                
-                current_date = dt.date.today()
-                date_now = st.text_input(":blue[Fecha de registro]", value=current_date.strftime("%d/%m/%y"), disabled=True)
-                
+        
                 # Sección 1 de preguntas
                 st.subheader("Sección 1. Datos generales del paciente")
                 col1_sec1, col2_sec1 = st.columns(2)
@@ -191,9 +189,212 @@ def form_main():
                 with col2_ext:
                     quest2_ext = st.text_area("De la pregunta anterior describe el porque", max_chars=200)
                     quest4_ext = st.text_area("¿Qué fortalezas personales o familiares usará en su propósito de salud?", max_chars=200)
-                    quest6_ext = st.multiselect("Seleccione sus 3 propósitos más importantes", ["1. Mejor nutrición", "2. Peso ideal", "3. Dormir mejor", "4. Dejar algún vicio", "5. Salud emocional", "6. Mejor vida social"], max_selections=3)
-                
+                    quest6_ext = st.multiselect("Seleccione sus 3 propósitos más importantes", ["Mejor nutrición", "Peso ideal", "Dormir mejor", "Dejar algún vicio", "Salud emocional", "Mejor vida social"], max_selections=3)
+                    #st.write(quest6_ext)
+                    #print(", ".join(quest6_ext))
+                    #print(len(", ".join(quest6_ext)))
+
+                    
                 submitted = st.form_submit_button("Enviar")
+                
+                # codigo para almacenar los datos en la base de datos
+                if submitted:
+                    try:
+                        cnx = mysql.connector.connect(
+                            user='root', 
+                            password='12345',
+                            host='127.0.0.1',
+                            database='slsm_db'
+                        )
+
+                        cursor = cnx.cursor()
+                        
+                        sql = """
+                        INSERT INTO historiales_medicos (
+                            id_usuario,
+                            fecha_nacimiento,
+                            altura,
+                            numero_telefono,
+                            genero,
+                            peso
+                            pregunta1_sec2,
+                            pregunta2_sec2,
+                            pregunta3_sec2,
+                            pregunta4_sec2,
+                            pregunta5_sec2,
+                            pregunta6_sec2,
+                            pregunta7_sec2,
+                            pregunta8_sec2,
+                            pregunta9_sec2,
+                            pregunta10_sec2,
+                            pregunta11_sec2,
+                            pregunta12_sec2,
+                            pregunta13_sec2,
+                            pregunta1_sec3,
+                            pregunta2_sec3,
+                            pregunta3_sec3,
+                            pregunta4_sec3,
+                            pregunta5_sec3,
+                            pregunta6_sec3,
+                            pregunta7_sec3,
+                            pregunta8_sec3,
+                            pregunta9_sec3,
+                            pregunta10_sec3,
+                            pregunta11_sec3,
+                            pregunta12_sec3,
+                            pregunta13_sec3,
+                            pregunta14_sec3,
+                            pregunta15_sec3,
+                            pregunta16_sec3,
+                            pregunta17_sec3,
+                            pregunta1_sec4,
+                            pregunta2_sec4,
+                            pregunta3_sec4,
+                            pregunta4_sec4,
+                            pregunta5_sec4,
+                            pregunta6_sec4,
+                            pregunta7_sec4,
+                            pregunta8_sec4,
+                            pregunta9_sec4,
+                            pregunta10_sec4,
+                            pregunta11_sec4,
+                            pregunta12_sec4,
+                            pregunta13_sec4,
+                            pregunta14_sec4,
+                            pregunta15_sec4,
+                            pregunta16_sec4,
+                            pregunta17_sec4,
+                            pregunta18_sec4,
+                            pregunta19_sec4,
+                            pregunta20_sec4,
+                            pregunta21_sec4,
+                            pregunta22_sec4,
+                            pregunta1_sec5,
+                            pregunta2_sec5,
+                            pregunta3_sec5,
+                            pregunta4_sec5,
+                            pregunta5_sec5,
+                            pregunta6_sec5,
+                            pregunta7_sec5,
+                            pregunta1_sec6,
+                            pregunta2_sec6,
+                            pregunta3_sec6,
+                            pregunta4_sec6,
+                            pregunta5_sec6,
+                            pregunta6_sec6,
+                            pregunta1_sec7,
+                            pregunt2_sec7,
+                            pregunta3_sec7,
+                            pregunta4_sec7,
+                            pregunta1_ext,
+                            pregunta2_ext,
+                            pregunta3_ext,
+                            pregunta4_ext,
+                            pregunta5_ext,
+                            pregunta6_ext
+                        ) 
+                        VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
+                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	
+                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	
+                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	
+                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	
+                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	
+                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	
+                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s, %s                     
+                        )
+                        """
+                        
+                        val = (
+                            st.session_state['id_user'],
+                            date,
+                            height,
+                            number_phone,
+                            genre,
+                            weight,
+                            quest1_sec2, 
+                            quest2_sec2, 
+                            quest3_sec2, 
+                            quest4_sec2, 
+                            quest5_sec2, 
+                            quest6_sec2, 
+                            quest7_sec2, 
+                            quest8_sec2, 
+                            quest9_sec2, 
+                            quest10_sec2, 
+                            quest11_sec2, 
+                            quest12_sec2, 
+                            quest13_sec2,
+                            quest1_sec3,
+                            quest2_sec3, 
+                            quest3_sec3, 
+                            quest4_sec3, 
+                            quest5_sec3, 
+                            quest6_sec3, 
+                            quest7_sec3, 
+                            quest8_sec3, 
+                            quest9_sec3, 
+                            quest10_sec3, 
+                            quest11_sec3, 
+                            quest12_sec3, 
+                            quest13_sec3, 
+                            quest14_sec3, 
+                            quest15_sec3, 
+                            quest16_sec3, 
+                            quest17_sec3, 
+                            quest1_sec4,
+                            quest2_sec4, 
+                            quest3_sec4, 
+                            quest4_sec4, 
+                            quest5_sec4, 
+                            quest6_sec4, 
+                            quest7_sec4, 
+                            quest8_sec4, 
+                            quest9_sec4, 
+                            quest10_sec4, 
+                            quest11_sec4, 
+                            quest12_sec4, 
+                            quest13_sec4, 
+                            quest14_sec4, 
+                            quest15_sec4, 
+                            quest16_sec4, 
+                            quest17_sec4, 
+                            quest18_sec4, 
+                            quest19_sec4, 
+                            quest20_sec4, 
+                            quest21_sec4, 
+                            quest22_sec4, 
+                            quest1_sec5,
+                            quest2_sec5, 
+                            quest3_sec5, 
+                            quest4_sec5,
+                            quest5_sec5,
+                            quest6_sec5, 
+                            quest7_sec5,
+                            quest1_sec6, 
+                            ", ".join(quest2_sec6),
+                            quest3_sec6, 
+                            quest4_sec6, 
+                            quest5_sec6, 
+                            quest6_sec6, 
+                            quest1_sec7,
+                            quest2_sec7, 
+                            quest3_sec7, 
+                            quest4_sec7, 
+                            quest1_ext,
+                            quest2_ext, 
+                            quest3_ext, 
+                            quest4_ext, 
+                            quest5_ext, 
+                            ", ".join(quest6_ext)
+                        )
+
+                        cursor.execute(sql, val)
+                        cnx.commit()
+                        
+                        cursor.close()
+                        cnx.close()
+                    except:
+                        st.warning("Por favor asegurese de llenar todos los campos")         
                 
 
 """
