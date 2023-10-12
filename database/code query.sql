@@ -122,8 +122,8 @@ CREATE TABLE hojas_evolucion_medico (
     edad_metabolica INT,
     calorias INT,
     glucosa FLOAT,
-    comida_chatarra VARCHAR(12),
-    calidad_sueno VARCHAR(12),
+    comida_chatarra VARCHAR(15),
+    calidad_sueno VARCHAR(15),
     notas VARCHAR(200),
     PRIMARY KEY(id_hojas)
 );
@@ -176,6 +176,8 @@ DELETE FROM `slsm_db`.`usuarios` WHERE (`id_usuario` = '7');
 SELECT * FROM usuarios;	
 SELECT * FROM roles;
 SELECT * FROM historiales_medicos;
+SELECT * FROM avances_usuarios;
+SELECT * FROM hojas_evolucion_medico;
 
 SELECT 
 	usuarios.id_usuario,

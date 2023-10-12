@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+import mysql.connector
 import datetime as dt
 
 def progress_record_main():
@@ -54,7 +55,72 @@ def progress_record_main():
                 notes = st.text_area('Notas de la sesión', max_chars=200)
 
                 submitted = st.form_submit_button("Enviar")
+                
+                if submitted:
+                    try:
+                        cnx = mysql.connector.connect(
+                            user='root', 
+                            password='12345',
+                            host='127.0.0.1',
+                            database='slsm_db'
+                        )
 
+                        cursor = cnx.cursor()
+                        
+                        sql = """
+                        INSERT INTO hojas_evolucion_medico (
+                            id_usuario,
+                            fecha_registro,
+                            peso,
+                            IMC,
+                            grasa_viseral,
+                            porcentaje_musculo,
+                            abdomen,
+                            ejercicio,
+                            horas_sueno,
+                            talla,
+                            grasa_corporal,
+                            edad_metabolica,
+                            calorias,
+                            glucosa,
+                            comida_chatarra,
+                            calidad_sueno,
+                            notas
+                        ) 
+                        VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
+                                %s,	%s,	%s,	%s,	%s,	%s,	%s	                   
+                        )
+                        """
+                        
+                        val = (
+                            st.session_state['id_user'],
+                            date_now,
+                            weight,
+                            IMC,
+                            visceral_fat,
+                            muscle,
+                            abdomen,
+                            exercise,
+                            hours_sleep,
+                            size,
+                            body_fat,
+                            metabolic_age,
+                            calories,
+                            glucose,
+                            junk_food,
+                            sleep_quality,
+                            notes
+                        )
+                        
+                        cursor.execute(sql, val)
+                        cnx.commit()
+                        
+                        cursor.close()
+                        cnx.close()
+                    except:
+                        st.warning("Por favor asegurese de llenar todos los campos")
+                
+                
         if selectd == "Hojas de evolución":
             st.write("En construcción")
         
@@ -62,24 +128,87 @@ def progress_record_main():
         if selectd == "Notas del paciente":
             st.write("En construcción")
 
+"""
+                if submitted:
+                    cnx = mysql.connector.connect(
+                        user='root', 
+                        password='12345',
+                        host='127.0.0.1',
+                        database='slsm_db'
+                    )
 
-""""
-date_now = [DATE]
+                    cursor = cnx.cursor()
+                    
+                    sql = "
+                    INSERT INTO hojas_evolucion_medico (
+                        id_usuario,
+                        fecha_registro,
+                        peso,
+                        IMC,
+                        grasa_viseral,
+                        porcentaje_musculo,
+                        abdomen,
+                        ejercicio,
+                        horas_sueno,
+                        talla,
+                        grasa_corporal,
+                        edad_metabolica,
+                        calorias,
+                        glucosa,
+                        comida_chatarra,
+                        calidad_sueno,
+                        notas
+                    ) 
+                    VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
+                            %s,	%s,	%s,	%s,	%s,	%s,	%s	                   
+                    )
+                    "
+                
+                    
+                    val = (
+                        st.session_state['id_user'],
+                        date_now,
+                        weight,
+                        IMC,
+                        visceral_fat,
+                        muscle,
+                        abdomen,
+                        exercise,
+                        hours_sleep,
+                        size,
+                        body_fat,
+                        metabolic_age,
+                        calories,
+                        glucose,
+                        junk_food,
+                        sleep_quality,
+                        notes
+                    )
+                    
+                    cursor.execute(sql, val)
+                    cnx.commit()
+                    
+                    cursor.close()
+                    cnx.close()
 
-weight = [FLOAT]
-IMC = [FLOAT]
-visceral_fat = [FLOAT]
-muscle = [FLOAT]
-abdomen = [FLOAT]
-exercise = [INT]
-hours_sleep = [INT]
 
-size = [FLOAT]
-body_fat = [FLOAT]
-metabolic_age = [INT]
-calories = [INT]
-glucose = [FLOAT]
-junk_food = [VARCHAR lim 12]
-sleep_quality = [VARCHAR lim 15]
-notes = [VARCHAR lim 200]
+
+date_now,
+
+weight,
+IMC,
+visceral_fat,
+muscle,
+abdomen,
+exercise,
+hours_sleep,
+
+size,
+body_fat,
+metabolic_age,
+calories,
+glucose,
+junk_food,
+sleep_quality,
+notes
 """

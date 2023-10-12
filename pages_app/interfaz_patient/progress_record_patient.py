@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+import mysql.connector
 import datetime as dt
 
 def progress_record_patient_main():
@@ -131,43 +132,98 @@ def progress_record_patient_main():
                 st.divider()
                     
                 submitted = st.form_submit_button("Enviar")
+                
+                if  submitted:
+                    try:
+                        cnx = mysql.connector.connect(
+                            user='root', 
+                            password='12345',
+                            host='127.0.0.1',
+                            database='slsm_db'
+                        )
+
+                        cursor = cnx.cursor()
+                        
+                        sql = """INSERT INTO avances_usuarios (
+                            id_usuario,
+                            fecha_registro,
+                            pregunta1_sec1,
+                            notas1_sec1,
+                            notas2_sec1,
+                            pregunta1_sec2,
+                            notas1_sec2,
+                            notas2_sec2,
+                            pregunta1_sec3,
+                            notas1_sec3,
+                            notas2_sec3,
+                            pregunta1_sec4,
+                            notas1_sec4,
+                            notas2_sec4,
+                            pregunta1_sec5,
+                            notas1_sec5,
+                            notas2_sec5,
+                            pregunta1_sec6,
+                            notas1_sec6,
+                            notas2_sec6,
+                            pregunta1_sec7
+                        ) 
+                        VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
+                                %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s                
+                        )
+                        """
+
+                        val = (
+                            st.session_state['id_user'],
+                            date_now,
+                            quest1_sec1,
+                            notes1_sec1,
+                            notes2_sec1,
+                            quest1_sec2,
+                            notes1_sec2,
+                            notes2_sec2,
+                            quest1_sec3,
+                            notes1_sec3,
+                            notes2_sec3,
+                            quest1_sec4,
+                            notes1_sec4,
+                            notes2_sec4,
+                            quest1_sec5,
+                            notes1_sec5,
+                            notes2_sec5,
+                            quest1_sec6,
+                            notes1_sec6,
+                            notes2_sec6,
+                            quest1_sec7
+                        )
+                        
+                        cursor.execute(sql, val)
+                        cnx.commit()
+                        
+                        cursor.close()
+                        cnx.close()
+                    except:
+                        st.warning("Por favor asegurese de llenar todos los campos")
 
 
 """
-date_now = [DATE]
-
-# Sección 1 de preguntas
-quest1_sec1 = [INT]
-notes1_sec1 = [VARCHAR lim 200]
-notes2_sec1 = [VARCHAR lim 200]
-
-
-# Sección 2 de preguntas
-quest1_sec2 = [INT]
-notes1_sec2 = [VARCHAR lim 200]
-notes2_sec2 = [VARCHAR lim 200]
-
-
-# Sección 3 de preguntas
-quest1_sec3 = [INT]
-notes1_sec3 = [VARCHAR lim 200]
-notes2_sec3 = [VARCHAR lim 200]
-
-
-# Sección 4 de preguntas
-quest1_sec4 = [INT]
-notes1_sec4 = [VARCHAR lim 200]
-notes2_sec4 = [VARCHAR lim 200]
-
-
-# Sección 5 de preguntas
-quest1_sec5 = [INT]
-notes1_sec5 = [VARCHAR lim 200]
-notes2_sec5 = [VARCHAR lim 200]
-
-# Sección 6 de preguntas
-quest1_sec6 = [INT]
-notes1_sec6 = [VARCHAR lim 200]
-notes2_sec6 = [VARCHAR lim 200]
-quest1_sec7 = [VARCHAR lim 200]
+date_now,
+quest1_sec1,
+notes1_sec1,
+notes2_sec1,
+quest1_sec2,
+notes1_sec2,
+notes2_sec2,
+quest1_sec3,
+notes1_sec3,
+notes2_sec3,
+quest1_sec4,
+notes1_sec4,
+notes2_sec4,
+quest1_sec5,
+notes1_sec5,
+notes2_sec5,
+quest1_sec6,
+notes1_sec6,
+notes2_sec6,
+quest1_sec7
 """
