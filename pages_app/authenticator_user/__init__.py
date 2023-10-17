@@ -179,7 +179,7 @@ class Authenticate:
             
         password_hash = Hasher([password]).generate()
         sql = "INSERT INTO usuarios (nombre, apellidos, correo, id_rol, contrasena, contrasena_hash) VALUES (%s, %s, %s, %s, %s, %s)"
-        val = (name.upper(), last_name.upper(), email, rol_id, password, password_hash[0])
+        val = (" ".join(name.upper().split()), " ".join(last_name.upper().split()), email, rol_id, password, password_hash[0])
 
         cursor.execute(sql, val)
         cnx.commit()

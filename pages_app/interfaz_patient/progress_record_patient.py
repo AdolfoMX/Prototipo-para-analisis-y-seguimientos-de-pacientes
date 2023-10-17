@@ -12,6 +12,7 @@ def progress_record_patient_main():
                 .css-1y4p8pa {
                     margin-top: -6rem;
                 }
+                
             </style>
             """, unsafe_allow_html=True
         )
@@ -174,7 +175,7 @@ def progress_record_patient_main():
 
                         val = (
                             st.session_state['id_user'],
-                            date_now,
+                            current_date,
                             quest1_sec1,
                             notes1_sec1,
                             notes2_sec1,

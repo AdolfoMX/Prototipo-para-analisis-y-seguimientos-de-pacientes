@@ -173,11 +173,33 @@ DELETE FROM `slsm_db`.`usuarios` WHERE (`id_usuario` = '7');
 */
 
 /*Consulta*/
-SELECT * FROM usuarios;	
+SELECT * FROM usuarios;
 SELECT * FROM roles;
 SELECT * FROM historiales_medicos;
 SELECT * FROM avances_usuarios;
 SELECT * FROM hojas_evolucion_medico;
+
+
+SELECT 
+	id_usuario,
+    nombre,
+    apellidos
+FROM 
+	usuarios
+WHERE 
+	CONCAT(nombre, " ", apellidos) LIKE '%ADOLFO%';
+    
+
+SELECT 
+	id_usuario,
+    CONCAT(nombre, " ", apellidos) AS nombre_completo
+FROM 
+	usuarios
+WHERE 
+    id_rol = 2 AND CONCAT(nombre, " ", apellidos) LIKE '%ADOLFO%';
+    
+SELECT id_usuario, CONCAT(nombre, " ", apellidos) AS nombre_completo FROM usuarios WHERE id_rol = 2 AND CONCAT(nombre, " ", apellidos) LIKE '%ADOLFO%';
+
 
 SELECT 
 	usuarios.id_usuario,
