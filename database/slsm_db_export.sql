@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `slsm_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 
 USE `slsm_db`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: slsm_db
+-- Host: localhost    Database: slsm_db
 -- ------------------------------------------------------
 -- Server version	8.0.34
 
@@ -48,7 +48,7 @@ CREATE TABLE `avances_usuarios` (
   `notas2_sec6` varchar(200) DEFAULT NULL,
   `pregunta1_sec7` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_avance`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,6 +57,7 @@ CREATE TABLE `avances_usuarios` (
 
 LOCK TABLES `avances_usuarios` WRITE;
 /*!40000 ALTER TABLE `avances_usuarios` DISABLE KEYS */;
+INSERT INTO `avances_usuarios` VALUES (1,1,'2023-10-23',5,'EGXRDHFCGV','XRDFCGH',5,'fsgdxhfcjg','zsxdfcg',5,'fxgchj','tcyhvj',5,'xtfcygvjhbk','szxdfcgh',5,'yhvjbk','xrdtcfgvhb',5,'xdfgch','drxtfcvg','dfghj'),(2,1,'2023-10-23',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si','si');
 /*!40000 ALTER TABLE `avances_usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +152,7 @@ CREATE TABLE `historiales_medicos` (
   `pregunta5_ext` varchar(2) DEFAULT NULL,
   `pregunta6_ext` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id_historial`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,6 +161,7 @@ CREATE TABLE `historiales_medicos` (
 
 LOCK TABLES `historiales_medicos` WRITE;
 /*!40000 ALTER TABLE `historiales_medicos` DISABLE KEYS */;
+INSERT INTO `historiales_medicos` VALUES (1,6,'2023-10-01',0.01,'1235689','Femenino',0.1,'No',1,'No',0.1,1,'No','dfghj',1,1,'fghj','ftyguh','fghjk','tyui','No',1,'No','rtyui','No',1,'No','fghuj','No',1,'No','tyuio','No',1,'No','yguio','dfghjk','No','No','No','No','fghjk','No','No','No','No','No','No','No','No','dfghj','No','No','No','No','No','No','No','sedrtfgyuh','No','fghjk','No','Duermo más de lo normal','No','No','4 a 6 horas',1,'Omnívoro','No','No','No','No','No','No','dfghjk','No','No','sdfghj','No','fghj','No','Mejor nutrición'),(2,1,'2023-10-10',1,'23456','Femenino',1,'Si',1,'Si',1,1,'Si','rxdcftgvhbjnk',1,1,'rdfxgcfhv','tyvuj','gchvjchg','cgfvh','Si',0,'Si','rxdtgfchvj','Si',0,'Si','gxfchv','Si',0,'Si','xfgfchgjv','Si',0,'Si','tdyfcguvjh','rxdtfchg','Si','Si','Si','Si','rtcyvu','Si','Si','Si','Si','Si','Si','Si','Si','txfcgh','Si','Si','Si','Si','Si','Si','Si','gchv','Si','xdfcghbj','Si','Me quitan el sueño','Si','Si','4 o menos',0,'Vegetariano','Si','Si','Si','Si','Si','Si','xdgcfhj','Si','Sí','xgfchvj','Sí','xfgchvjj','Sí','Mejor nutrición'),(3,10,'1980-08-11',0.01,'235678','Femenino',0.1,'No',1,'No',0.1,1,'No','rety',1,1,'gfhjk','fghjk','gfhjk','gfhjk','No',1,'No','gfhj','No',1,'No','tygjk','No',1,'No','trfyui','No',1,'No','ytui','fghij','No','No','No','No','fghjk','No','No','No','No','No','No','No','No','fghjk','No','No','No','No','No','No','No','gfhj','No','gfhjk','No','Duermo más de lo normal','No','No','6 a 8 horas',1,'Vegetariano','No','No','No','No','No','No','fdghjkl','No','No','fghj','No','tyuio','No','Salud emocional');
 /*!40000 ALTER TABLE `historiales_medicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +192,7 @@ CREATE TABLE `hojas_evolucion_medico` (
   `calidad_sueno` varchar(12) DEFAULT NULL,
   `notas` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_hojas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,6 +201,7 @@ CREATE TABLE `hojas_evolucion_medico` (
 
 LOCK TABLES `hojas_evolucion_medico` WRITE;
 /*!40000 ALTER TABLE `hojas_evolucion_medico` DISABLE KEYS */;
+INSERT INTO `hojas_evolucion_medico` VALUES (1,2,'2023-10-23',0.02,0.01,0.01,0.01,0.01,2,2,0,0.01,2,1001,1001,'Poca','Mala','dfghjk'),(2,9,'2023-10-23',60,20,2,20,20,20,8,20,20,20,1200,1200,'Casi nada','Buena','rzdhxfcgvjbk'),(3,6,'2023-10-23',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','gfhj'),(4,1,'2023-10-23',60,25,2,20,70,40,7,70,20,25,1700,1200,'Mucha','Buena','va bien'),(5,3,'2023-10-23',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','ertyui'),(6,3,'2023-10-16',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','retyui');
 /*!40000 ALTER TABLE `hojas_evolucion_medico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +245,7 @@ CREATE TABLE `usuarios` (
   `contrasena` varchar(100) DEFAULT NULL,
   `contrasena_hash` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +254,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'GUADALUPE','GUINTO','guadalupe.guinto@gmail.com',2,'12345','$2b$12$NffuYu0ZnORLiM/PObslrugmyRsFz0V8sPArMW2HK7Lu3VYawhb7.'),(2,'AMAYRANI','GOMEZ','170300079@ucaribe.edu.mx',1,'12345','$2b$12$q1ROBA.geON5Ll9PvyD.ROHVtBTqyKXwEfSPzeIFZb.vz2PiKUAEm'),(3,'ADOLFO ','TUN DZUL','170300124@ucaribe.edu.mx',2,'12345','$2b$12$7dYcrIuYsYl8Rg769cLTzeL0WHxbsq5RBuWsq1JuLqd8UmozirYD2'),(4,'KARLA','GUINTO','karla.guinto@gmail.com',2,'12345','$2b$12$M9BpQ4wQCB6pbiLrodDkjuvkCejCoH..F1AN8ZD6aoblpNHxbikqO'),(5,'GUADALUPE','SALINAS','guadalupe.salinas@gmail.com',1,'12345','$2b$12$6QnmWuNG1RQoHh6rwcch5.eCZTvKiHKgJx3WkCR9FZNwEUl7giADy'),(6,'AMAYRANI','GOMEZ','amayraniigomez@gmail.com',2,'12345','$2b$12$o8uAScdMsXi8ZXT8R9ZmyOXzcaVYN5X31MTQts2ktwNVgeiJ0NEfO');
+INSERT INTO `usuarios` VALUES (1,'GUADALUPE','GUINTO','guadalupe.guinto@gmail.com',2,'12345','$2b$12$NffuYu0ZnORLiM/PObslrugmyRsFz0V8sPArMW2HK7Lu3VYawhb7.'),(2,'AMAYRANI','GOMEZ','170300079@ucaribe.edu.mx',1,'12345','$2b$12$q1ROBA.geON5Ll9PvyD.ROHVtBTqyKXwEfSPzeIFZb.vz2PiKUAEm'),(3,'ADOLFO','TUN DZUL','170300124@ucaribe.edu.mx',2,'12345','$2b$12$7dYcrIuYsYl8Rg769cLTzeL0WHxbsq5RBuWsq1JuLqd8UmozirYD2'),(4,'KARLA','GUINTO','karla.guinto@gmail.com',2,'12345','$2b$12$M9BpQ4wQCB6pbiLrodDkjuvkCejCoH..F1AN8ZD6aoblpNHxbikqO'),(5,'GUADALUPE','SALINAS','guadalupe.salinas@gmail.com',1,'12345','$2b$12$6QnmWuNG1RQoHh6rwcch5.eCZTvKiHKgJx3WkCR9FZNwEUl7giADy'),(6,'AMAYRANI','GOMEZ','amayraniigomez@gmail.com',2,'12345','$2b$12$o8uAScdMsXi8ZXT8R9ZmyOXzcaVYN5X31MTQts2ktwNVgeiJ0NEfO'),(8,'ASHWIN','CARDENAS BOBADILLA','170300113@ucqribe.edu.mx',2,'adolfoestahermoso','$2b$12$kAIM7Q.WT63FbO7tVUV9ceTRejMI4N1NkTrHWKkMY6cUu99JG5fJC'),(9,'KARLA','GUINTO','180300325@ucaribe.edu.mx',1,'12345','$2b$12$reF50MVExOP9n7f2PmtUeuEQSP3381EN1vW8KUcrAdzegS9nXU/Om'),(10,'AMAYRANI','GOMEZ','herg08@hotmail.com',2,'12345','$2b$12$PS1TC7UO8EVD92ieJ0xZO.TlyK5BhF1r4eEiNQrnDD2Me3.siz3ie');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-09 22:50:22
+-- Dump completed on 2023-10-16 22:53:26
