@@ -42,13 +42,13 @@ if st.session_state['authentication_status']:
         patient_view_main()
     
 elif st.session_state['authentication_status'] is False:
-    st.error('Usuario/contraseña es incorrecto')
+    st.error('Usuario/contraseña es incorrecto', icon="⛔")
     
     # Registro de usuario
     authenticator.register_user()
     
 elif st.session_state['authentication_status'] is None:
-    st.warning('Por favor ingrese su usuario y contraseña')
+    st.warning('Por favor ingrese su usuario y contraseña', icon="⚠️")
     
     # Registro de usuario
     authenticator.register_user()

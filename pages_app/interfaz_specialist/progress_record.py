@@ -5,11 +5,30 @@ import mysql.connector
 import datetime as dt
 import re
 
+def check_users_db(full_name):
+    cnx = mysql.connector.connect(
+        user='root', 
+        password='12345',
+        host='127.0.0.1',
+        database='slsm_db'
+    )
+    
+    cursor = cnx.cursor()
+    
+    sql = f"SELECT id_usuario, CONCAT(nombre, ' ', apellidos) AS nombre_completo FROM usuarios WHERE id_rol = 2 AND CONCAT(nombre, ' ', apellidos) LIKE '%{full_name}%'"
+    cursor.execute(sql)
+
+    result = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    
+    return result
+
+
 def form(id_user):
-    #Cuestionario
     with st.form("Hoja de evolución", clear_on_submit=True):
         current_date = dt.date.today()
-        date_now = st.text_input(":blue[Fecha de registro]", value="DD/MM/YYYY", disabled=True)
+        date_now = st.text_input(":blue[Fecha de registro]", value=current_date.strftime("%d/%m/%y"), disabled=True)
 
         col1_sec1, col2_sec1 = st.columns(2)
 
@@ -97,118 +116,173 @@ def form(id_user):
                 
                 cursor.close()
                 cnx.close()
+                
+                st.success('La información ha sido registrada!', icon="✅")
             except:
-                st.warning("Por favor asegurese de llenar todos los campos")
+                st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
 
 
-def check_users_db(full_name):
-    cnx = mysql.connector.connect(
-        user='root', 
-        password='12345',
-        host='127.0.0.1',
-        database='slsm_db'
-    )
-    
-    cursor = cnx.cursor()
-    
-    sql = f"SELECT id_usuario, CONCAT(nombre, ' ', apellidos) AS nombre_completo FROM usuarios WHERE id_rol = 2 AND CONCAT(nombre, ' ', apellidos) LIKE '%{full_name}%'"
-    cursor.execute(sql)
-
-    result = cursor.fetchall()
-    cursor.close()
-    cnx.close()
-    
-    return result
-    
 def evolution_sheets(id_user):
-    # Colocar codigo aqui
     cnx = mysql.connector.connect(
         user='root', 
         password='12345',
         host='127.0.0.1',
         database='slsm_db'
     )
-    
-    cursor = cnx.cursor()
-    
-    sql = f"SELECT * FROM hojas_evolucion_medico"
-    cursor.execute(sql)
-
-    result = cursor.fetchall()
-    cursor.close()
-    cnx.close()
     
     #current_date.strftime("%d/%m/%y")
     date = st.date_input("Selecciona una fecha de búsqueda", min_value=dt.date(2023,1,1), format="DD/MM/YYYY")
     
-    #st.write(result)
-    #print(result[0][0])
-    #print(type(date))
-    #print(type(result[0][0]))
-    #st.write(result)
-    #st.write(date)
-    #st.write(id_user)
+    cursor = cnx.cursor()
+    sql = f"SELECT * FROM hojas_evolucion_medico WHERE id_usuario = {id_user} AND fecha_registro = '{date}'"
     
-    for i in range(len(result)):
-        st.subheader(f":date: {i+1}. Fecha: :blue[{date}]", divider='green')
-        
-        with st.expander(f"Ver hoja {i+1}..."):
-            col1_sec1, col2_sec1 = st.columns(2)
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    
+    if not result:
+        st.warning("No se encontraron registros de esa fecha", icon="⚠️")
+    else:
+        for i in range(len(result)):
+            st.subheader(f":date: {i+1}. Fecha: :blue[{result[i][2]}]", divider='green')
+            
+            with st.expander("**Ver hoja**..."):
+                col1_sec1, col2_sec1 = st.columns(2)
 
-            with col1_sec1:
-                st.text_input('Peso (kg)', value=result[i][3], disabled=True, key=f"{i+1}.1")
-                st.text_input('Índice de masa corporal (IMC)', value=result[i][4], disabled=True, key=f"{i+1}.2")
-                st.text_input('Grasa visceral (%)', value=result[i][5], disabled=True, key=f"{i+1}.3")
-                st.text_input('Porcentaje de musculo (%)', value=result[i][6], disabled=True, key=f"{i+1}.4")
-                st.text_input('Perimetro abdominal (cm)', value=result[i][7], disabled=True, key=f"{i+1}.5")
-                st.text_input('Minutos al día de ejercicio', value=result[i][8], disabled=True, key=f"{i+1}.6")
-                st.text_input('Horas de sueño', value=result[i][9], disabled=True, key=f"{i}.7")
+                with col1_sec1:
+                    st.text_input('Peso (kg)', value=result[i][3], disabled=True, key=f"{i+1}.1")
+                    st.text_input('Índice de masa corporal (IMC)', value=result[i][4], disabled=True, key=f"{i+1}.2")
+                    st.text_input('Grasa visceral (%)', value=result[i][5], disabled=True, key=f"{i+1}.3")
+                    st.text_input('Porcentaje de musculo (%)', value=result[i][6], disabled=True, key=f"{i+1}.4")
+                    st.text_input('Perimetro abdominal (cm)', value=result[i][7], disabled=True, key=f"{i+1}.5")
+                    st.text_input('Minutos al día de ejercicio', value=result[i][8], disabled=True, key=f"{i+1}.6")
+                    st.text_input('Horas de sueño', value=result[i][9], disabled=True, key=f"{i}.7")
 
-            with col2_sec1:
-                st.text_input('Talla (cm)', value=result[i][9], disabled=True, key=f"{i+1}.8")
-                st.text_input('Porcentaje de grasa corporal (%)', value=result[i][10], disabled=True, key=f"{i+1}.9")
-                st.text_input('Edad metabólica', value=result[i][11], disabled=True, key=f"{i+1}.10")
-                st.text_input('Consumo de calorias (kcal)', value=result[i][12], disabled=True, key=f"{i+1}.11")
-                st.text_input('Glucosa en sangre (mg/dl)', value=result[i][13], disabled=True, key=f"{i+1}.12")
-                st.text_input('Apetito de comida chatarra', value=result[i][14], disabled=True, key=f"{i+1}.13")
-                st.text_input('Calidad de sueño', value=result[i][15], disabled=True, key=f"{i+1}.14")
+                with col2_sec1:
+                    st.text_input('Talla (cm)', value=result[i][10], disabled=True, key=f"{i+1}.8")
+                    st.text_input('Porcentaje de grasa corporal (%)', value=result[i][11], disabled=True, key=f"{i+1}.9")
+                    st.text_input('Edad metabólica', value=result[i][12], disabled=True, key=f"{i+1}.10")
+                    st.text_input('Consumo de calorias (kcal)', value=result[i][13], disabled=True, key=f"{i+1}.11")
+                    st.text_input('Glucosa en sangre (mg/dl)', value=result[i][14], disabled=True, key=f"{i+1}.12")
+                    st.text_input('Apetito de comida chatarra', value=result[i][15], disabled=True, key=f"{i+1}.13")
+                    st.text_input('Calidad de sueño', value=result[i][16], disabled=True, key=f"{i+1}.14")
+                    
+                st.text_area('Notas de la sesión', value=result[i][17], disabled=True, key=f"{i+1}.15")
+            
+    cursor.close()
+    cnx.close()
+
+
+def patient_notes(id_user):
+    cnx = mysql.connector.connect(
+        user='root', 
+        password='12345',
+        host='127.0.0.1',
+        database='slsm_db'
+    )
+    
+    #current_date.strftime("%d/%m/%y")
+    date = st.date_input("Selecciona una fecha de búsqueda", min_value=dt.date(2023,1,1), format="DD/MM/YYYY")
+    
+    cursor = cnx.cursor()
+    sql = f"SELECT * FROM avances_usuarios WHERE id_usuario = {id_user} AND fecha_registro = '{date}'"
+    
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    
+    if not result:
+        st.warning("No se encontraron registros de esa fecha", icon="⚠️")
+    else:
+        for i in range(len(result)):
+            st.subheader(f":date: {i+1}. Fecha: :blue[{result[i][2]}]", divider='green')
+            
+            with st.expander("**Ver hoja**..."):
+            
+                st.subheader("Sección 1. Salud física")
+                col1_sec1, col2_sec1 = st.columns(2)
+
+                with col1_sec1:
+                    st.text_input('Indique del 1 al 10 cómo se siente físicamente tras la última sesión:', value=result[i][3], disabled=True, key=f"{i+1}.1")
+
+                with col2_sec1:
+                    st.text_input('¿Cómo se sintió físicamente?', value=result[i][4], disabled=True, key=f"{i+1}.2")
+
+                st.text_area('¿Notó mejoras?', value=result[i][5], disabled=True, key=f"{i+1}.3")   
+
+                st.divider()
                 
-            st.text_area('Notas de la sesión', value=result[i][16], disabled=True, key=f"{i+1}.15")
-    
-    
-    """
-    if date == result[5][0]:
-        st.write("Fecha exacta")
-        print("Fecha exacta")
-    """
-    
-    col1_genel, col2_genel = st.columns(2)
-    """
-    with col1_genel:
-        weight = st.number_input('Peso (kg)', value= result[0][0], disabled=True)
-        IMC = st.number_input('Índice de masa corporal (IMC)', value= result[0][2], disabled=True)
-        visceral_fat = st.number_input('Grasa visceral (%)', value= result[0][4], disabled=True)
-        muscle = st.number_input('Porcentaje de musculo (%)', value= result[0][6], disabled=True)
-        abdomen = st.number_input('Perimetro abdominal (cm)', value= result[0][8], disabled=True)
-        exercise = st.number_input('Minutos al día de ejercicio', value= result[0][10], disabled=True)
-        hours_sleep = st.number_input('Horas de sueño', value= result[0][12], disabled=True)
+                st.subheader("Sección 2. Enfermedades crónicas")
+                col1_sec2, col2_sec2 = st.columns(2)
+                        
+                with col1_sec2:
+                    st.text_input('Indique del 1 al 10 cuánto considera que ha progresado en su salud', value=result[i][6], disabled=True, key=f"{i+1}.4")
+                
+                with col2_sec2:
+                    st.text_input('¿Cómo se sintió respecto a su salud?', value=result[i][7], disabled=True, key=f"{i+1}.5")
+                
+                st.text_area('¿Notó mejoras?', value=result[i][8], disabled=True, key=f"{i+1}.6")
+                
+                st.divider()
 
-    with col2_genel:
-        size = st.number_input('Talla (cm)', value= result[0][1], disabled=True)
-        body_fat = st.number_input('Porcentaje de grasa corporal (%)', value= result[0][3], disabled=True)
-        metabolic_age = st.number_input('Edad metabólica', value= result[0][5], disabled=True)
-        calories = st.number_input('Consumo de calorias (kcal)', value= result[0][7], disabled=True)
-        glucose = st.number_input('Glucosa en sangre (mg/dl)', value= result[0][9], disabled=True)
-        junk_food = st.selectbox('Apetito de comida chatarra', value= result[0][11], disabled=True)
-        sleep_quality = st.selectbox('Calidad de sueño', value= result[0][13], disabled=True)
-        
-    notes = st.text_area('Notas de la sesión', value= result[0][14], disabled=True)
-    """
+                st.subheader("Sección 3. Salud mental")
+                col1_sec3, col2_sec3 = st.columns(2)
+                
+                with col1_sec3:
+                    st.text_input('Indique del 1 al 10 cuánto considera que ha progresado en su salud mental', value=result[i][9], disabled=True, key=f"{i+1}.7")
+                
+                with col2_sec3:
+                    st.text_input('¿Cómo se sintió respecto a su salud mental?', value=result[i][10], disabled=True, key=f"{i+1}.8")
+                
+                st.text_area('¿Notó mejoras?', value=result[i][11], disabled=True, key=f"{i+1}.9")
+                
+                st.divider()
 
-def patient_notes():
-    # Colocar codigo aqui
-    
-    pass
+                st.subheader("Sección 4. Conciliación del sueño")
+                col1_sec4, col2_sec4 = st.columns(2)
+                    
+                with col1_sec4:
+                    st.text_input('Indique del 1 al 10 cuánto considera que ha progresado en su conciliación del sueño', value=result[i][12], disabled=True, key=f"{i+1}.10")
+                
+                with col2_sec4:
+                    st.text_input('¿Cómo se sintió respecto a su sueño?', value=result[i][13], disabled=True, key=f"{i+1}.12")
+                
+                st.text_area('¿Notó mejoras?', value=result[i][14], disabled=True, key=f"{i+1}.13")
+                
+                st.divider()
+
+                st.subheader("Sección 5. Alimentación")
+                col1_sec5, col2_sec5 = st.columns(2)
+                
+                with col1_sec5:
+                    st.text_input('Indique del 1 al 10 cuánto considera que ha progresado en su alimentación', value=result[i][15], disabled=True, key=f"{i+1}.14")
+                
+                with col2_sec5:
+                    st.text_input('¿Cómo se sintió respecto a su alimentación?', value=result[i][16], disabled=True, key=f"{i+1}.15")
+                
+                st.text_area('¿Notó mejoras?', value=result[i][17], disabled=True, key=f"{i+1}.16")
+                
+                st.divider()
+
+                st.subheader("Sección 6. Adicciones y/o consumos")
+                col1_sec6, col2_sec6 = st.columns(2)
+                
+                with col1_sec6:
+                    st.text_input('Indique del 1 al 10 cuánto considera que ha progresado en las adicciones y/o consumo (tabaco y/o alcohol)', value=result[i][18], disabled=True, key=f"{i+1}.17")
+                
+                with col2_sec6:
+                    st.text_input('¿Cómo se sintió respecto al consumo y/o adicciones?', value=result[i][19], disabled=True, key=f"{i+1}.18")
+                
+                st.text_area('¿Notó mejoras?', value=result[i][20], disabled=True, key=f"{i+1}.19")
+                
+                st.divider()
+
+                st.subheader("Sección 7. Avances generales")
+                st.text_area('En general, ¿Cómo se sintió tras esta última sesión?', value=result[i][21], disabled=True, key=f"{i+1}.20")
+
+                st.divider()
+            
+    cursor.close()
+    cnx.close()
+
 
 def progress_record_main():
     with st.container():
@@ -219,7 +293,9 @@ def progress_record_main():
                     margin-top: -6rem;
                 }
                 
-                data
+                div[data-testid="stExpander"] div[role="button"] p {
+                    font-size: 1.1rem;
+                }
             </style>
             """, unsafe_allow_html=True
         )
@@ -228,7 +304,7 @@ def progress_record_main():
             st.session_state['list_users'] = [""]
         
         st.title("Registro de datos")
-
+        
         col1, col2 = st.columns(2)        
         with col1:
             search_pacient = st.text_input("Buscador", value="")
@@ -242,13 +318,13 @@ def progress_record_main():
                 
                 if not results_db:
                     st.session_state['list_users'] = [""]
-                    st.warning("El paciente no está registrado")
+                    st.warning("El paciente no está registrado", icon="⚠️")
                 else:
                     st.session_state['list_users'] = ["ID " + str(data[0]) + ". "+ data[1] for data in results_db]
         
         with col2:
             selectd_user = st.selectbox("Paciente(s)", st.session_state['list_users'])
-            st.info(f"\\[ Selección ]: {selectd_user}")
+            st.info(f"[Selección]: {selectd_user}", icon="📋")
             
         st.subheader("", divider="orange")
         
@@ -268,9 +344,8 @@ def progress_record_main():
             if selectd == "Hojas de progreso":
                 evolution_sheets(id_user)
                 
-            
             if selectd == "Notas del paciente":
-                st.write("En construcción")
+                patient_notes(id_user)
 
 """
                 if submitted:

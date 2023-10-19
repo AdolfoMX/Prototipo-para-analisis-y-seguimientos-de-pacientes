@@ -249,7 +249,7 @@ class Authenticate:
                     
                     # verifica que los campos esten llenos
                     if "" in data_form:
-                        st.error("Por favor asegurese de llenar todos los campos")
+                        st.error("Por favor asegurese de llenar todos los campos", icon="⛔")
                     else:
                         
                         # verifica si las contraseñas son iguales
@@ -258,12 +258,12 @@ class Authenticate:
                                 
                                 # registro de datos a la base de datos
                                 self.add_user_db(name, last_name, email, rol, password)
-                                st.success("Felicidades, el registro ha sido exítoso!")
+                                st.success("Felicidades, el registro ha sido exítoso!", icon="✅")
                                 
                             else:
-                                st.error("Esta cuenta ya existe con el mismo correo")
+                                st.error("Esta cuenta ya existe con el mismo correo", icon="⛔")
                         else:
-                            st.error("Por favor asegurese de que la contraseña coincida")
+                            st.error("Por favor asegurese de que la contraseña coincida", icon="⛔")
 
     def form_login_main(self, form_name, location='main'):
         

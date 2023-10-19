@@ -35,7 +35,8 @@ def general_data_view(id_user):
         st.text_input("Apellidos", value=result[0][1], disabled=True)
         st.text_input("Número de teléfono", value=result2[0][1], disabled=True)
         st.text_input("Sexo", value=result2[0][2], disabled=True)
-        
+
+
 def medical_history_view(id_user):
     cnx = mysql.connector.connect(
         user='root', 
@@ -198,7 +199,7 @@ def medical_history_view(id_user):
             st.text_area("¿Qué fortalezas personales o familiares usará en su propósito de salud?", value=result[0][78], disabled=True)
             st.text_input("Seleccione sus 3 propósitos más importantes", value=result[0][80], disabled=True)
     else:
-        st.warning("Complete el cuestionario SLSM para visualizar la informacion")
+        st.warning("Complete el cuestionario SLSM para visualizar la informacion", icon="⚠️")
     
 
 def information_patient_main():

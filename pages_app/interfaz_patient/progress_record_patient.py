@@ -202,8 +202,9 @@ def progress_record_patient_main():
                         
                         cursor.close()
                         cnx.close()
+                        st.success('La información ha sido registrada!', icon="✅")
                     except:
-                        st.warning("Por favor asegurese de llenar todos los campos")
+                        st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
 
 
 """

@@ -396,9 +396,10 @@ def form_main():
                         else:
                             cursor.close()
                             cnx.close()
-                            st.warning("Hay datos existentes sobre este usuario")
+                            
+                            st.success('La información ha sido registrada!', icon="✅")
                     except:
-                        st.warning("Por favor asegurese de llenar todos los campos")
+                        st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
                         
 """
 # Sección 1 de preguntas

@@ -179,6 +179,7 @@ SELECT * FROM historiales_medicos;
 SELECT * FROM avances_usuarios;
 SELECT * FROM hojas_evolucion_medico;
 
+SELECT * FROM hojas_evolucion_medico WHERE fecha_registro = '2023-10-16';
 
 SELECT 
 	id_usuario,
