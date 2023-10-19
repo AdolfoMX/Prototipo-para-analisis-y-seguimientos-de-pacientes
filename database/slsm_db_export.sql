@@ -48,7 +48,7 @@ CREATE TABLE `avances_usuarios` (
   `notas2_sec6` varchar(200) DEFAULT NULL,
   `pregunta1_sec7` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_avance`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `avances_usuarios` (
 
 LOCK TABLES `avances_usuarios` WRITE;
 /*!40000 ALTER TABLE `avances_usuarios` DISABLE KEYS */;
-INSERT INTO `avances_usuarios` VALUES (1,1,'2023-10-23',5,'EGXRDHFCGV','XRDFCGH',5,'fsgdxhfcjg','zsxdfcg',5,'fxgchj','tcyhvj',5,'xtfcygvjhbk','szxdfcgh',5,'yhvjbk','xrdtcfgvhb',5,'xdfgch','drxtfcvg','dfghj'),(2,1,'2023-10-23',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si','si');
+INSERT INTO `avances_usuarios` VALUES (1,1,'2023-10-23',5,'EGXRDHFCGV','XRDFCGH',5,'fsgdxhfcjg','zsxdfcg',5,'fxgchj','tcyhvj',5,'xtfcygvjhbk','szxdfcgh',5,'yhvjbk','xrdtcfgvhb',5,'xdfgch','drxtfcvg','dfghj'),(2,1,'2023-10-23',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si','si'),(3,1,'2023-10-17',10,'bien','si',7,'mejor','si',8,'mucho mejor','si',2,'muy bien','si',10,'bien','si',2,'si','si','mejor');
 /*!40000 ALTER TABLE `avances_usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +192,7 @@ CREATE TABLE `hojas_evolucion_medico` (
   `calidad_sueno` varchar(12) DEFAULT NULL,
   `notas` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_hojas`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +201,7 @@ CREATE TABLE `hojas_evolucion_medico` (
 
 LOCK TABLES `hojas_evolucion_medico` WRITE;
 /*!40000 ALTER TABLE `hojas_evolucion_medico` DISABLE KEYS */;
-INSERT INTO `hojas_evolucion_medico` VALUES (1,2,'2023-10-23',0.02,0.01,0.01,0.01,0.01,2,2,0,0.01,2,1001,1001,'Poca','Mala','dfghjk'),(2,9,'2023-10-23',60,20,2,20,20,20,8,20,20,20,1200,1200,'Casi nada','Buena','rzdhxfcgvjbk'),(3,6,'2023-10-23',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','gfhj'),(4,1,'2023-10-23',60,25,2,20,70,40,7,70,20,25,1700,1200,'Mucha','Buena','va bien'),(5,3,'2023-10-23',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','ertyui'),(6,3,'2023-10-16',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','retyui');
+INSERT INTO `hojas_evolucion_medico` VALUES (1,2,'2023-10-23',0.02,0.01,0.01,0.01,0.01,2,2,0,0.01,2,1001,1001,'Poca','Mala','dfghjk'),(2,9,'2023-10-23',60,20,2,20,20,20,8,20,20,20,1200,1200,'Casi nada','Buena','rzdhxfcgvjbk'),(3,6,'2023-10-23',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','gfhj'),(4,1,'2023-10-23',60,25,2,20,70,40,7,70,20,25,1700,1200,'Mucha','Buena','va bien'),(5,3,'2023-10-23',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','ertyui'),(6,3,'2023-10-16',0.01,0.01,0.01,0.01,0.01,2,2,1,0.01,2,1001,1001,'Poca','Buena','retyui'),(7,3,'2023-10-17',69,30,2,40,80,120,6,30,20,20,2000,1300,'Poca','Buena','El paciente no a hecho caso a sus medicaciones, se a vuelto un adicto a la mota.'),(8,3,'2023-10-17',60,23,30,45,67,200,3,32,32,30,1200,1300,'Poca','Mala','Esta muertisimo'),(9,1,'2023-10-17',62,25,20,25,70,30,7,80,20,25,1500,1200,'Poca','Buena','va bien'),(10,1,'2023-10-17',61,20,20,20,60,30,7,70,20,20,1300,1100,'Poca','Mala','ta bien');
 /*!40000 ALTER TABLE `hojas_evolucion_medico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-16 22:53:26
+-- Dump completed on 2023-10-18 19:16:45
