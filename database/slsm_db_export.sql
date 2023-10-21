@@ -48,7 +48,7 @@ CREATE TABLE `avances_usuarios` (
   `notas2_sec6` varchar(200) DEFAULT NULL,
   `pregunta1_sec7` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_avance`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `avances_usuarios` (
 
 LOCK TABLES `avances_usuarios` WRITE;
 /*!40000 ALTER TABLE `avances_usuarios` DISABLE KEYS */;
-INSERT INTO `avances_usuarios` VALUES (1,1,'2023-10-23',5,'EGXRDHFCGV','XRDFCGH',5,'fsgdxhfcjg','zsxdfcg',5,'fxgchj','tcyhvj',5,'xtfcygvjhbk','szxdfcgh',5,'yhvjbk','xrdtcfgvhb',5,'xdfgch','drxtfcvg','dfghj'),(2,1,'2023-10-23',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si','si'),(3,1,'2023-10-17',10,'bien','si',7,'mejor','si',8,'mucho mejor','si',2,'muy bien','si',10,'bien','si',2,'si','si','mejor');
+INSERT INTO `avances_usuarios` VALUES (1,1,'2023-10-23',5,'EGXRDHFCGV','XRDFCGH',5,'fsgdxhfcjg','zsxdfcg',5,'fxgchj','tcyhvj',5,'xtfcygvjhbk','szxdfcgh',5,'yhvjbk','xrdtcfgvhb',5,'xdfgch','drxtfcvg','dfghj'),(2,1,'2023-10-23',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si',5,'bien','si','si'),(3,1,'2023-10-17',10,'bien','si',7,'mejor','si',8,'mucho mejor','si',2,'muy bien','si',10,'bien','si',2,'si','si','mejor'),(4,6,'2023-10-18',2,'dsfghjk','fghjk',6,'fghj','tfyguio',2,'fgh','fghjkl',6,'fghjkl','dfghj',3,'yui','gfhjkl',2,'fdghjklñ','gfhjkl','dfghjkl');
 /*!40000 ALTER TABLE `avances_usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-18 19:16:45
+-- Dump completed on 2023-10-20 19:58:08
