@@ -32,7 +32,7 @@ def patient_view_main():
         
         selectd = option_menu(
             menu_title="Menú principal",
-            options=["Inicio", "Acerca de mi", "Cuestionario SLSM", "Registro de avances", "Resultados"],
+            options=["Inicio", "Acerca de mi", "Cuestionario SLSM", "Avances", "Resultados"],
             icons=["house", "file-earmark-person", "file-medical", "percent", "bar-chart"]
         )           
         
@@ -50,7 +50,7 @@ def patient_view_main():
     if selectd == "Cuestionario SLSM":
         form_main()
 
-    if selectd == "Registro de avances":
+    if selectd == "Avances":
         progress_record_patient_main()
 
     if selectd == "Resultados":

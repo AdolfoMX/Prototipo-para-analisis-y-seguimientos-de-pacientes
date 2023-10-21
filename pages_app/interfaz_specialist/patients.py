@@ -79,7 +79,7 @@ def medical_history_view(id_user):
     
     if result:
         # colocar aqui visualizacion del formulario
-        st.subheader("Sección 1. Salud Física")
+        st.subheader("Sección Salud Física")
         col1_sec2, col2_sec2 = st.columns(2)
 
         with col1_sec2:
@@ -102,7 +102,7 @@ def medical_history_view(id_user):
 
         st.divider()
 
-        st.subheader("Sección 2. Enfermedades crónicas")
+        st.subheader("Sección Enfermedades crónicas")
         col1_sec3, col2_sec3 = st.columns(2)
 
         with col1_sec3:
@@ -129,7 +129,7 @@ def medical_history_view(id_user):
             
         st.divider()
 
-        st.subheader("Sección 3. Salud mental")
+        st.subheader("Sección Salud mental")
         col1_sec4, col2_sec4 = st.columns(2)
 
         with col1_sec4:
@@ -160,7 +160,7 @@ def medical_history_view(id_user):
 
         st.divider()
 
-        st.subheader("Sección 4. Conciliación del sueño")
+        st.subheader("Sección Conciliación del sueño")
         col1_sec5, col2_sec5 = st.columns(2)
 
         with col1_sec5:
@@ -176,7 +176,7 @@ def medical_history_view(id_user):
             
         st.divider()
 
-        st.subheader("Sección 5. Alimentación")
+        st.subheader("Sección Alimentación")
         col1_sec6, col2_sec6 = st.columns(2)
 
         with col1_sec6:
@@ -191,7 +191,7 @@ def medical_history_view(id_user):
 
         st.divider()
 
-        st.subheader("Sección 6. Adicciones y/o consumos")
+        st.subheader("Sección Adicciones y/o consumos")
         col1_sec7, col2_sec7 = st.columns(2)
 
         with col1_sec7:
@@ -240,10 +240,10 @@ def patient_notes(id_user):
     else:        
         with st.expander(f"**Ver información del paciente**..."):
             
-            st.subheader("**[Datos generales]**", divider='green')
+            st.subheader("**:blue[[Datos generales]]**", divider='green')
             general_data_view(id_user)
             
-            st.subheader("**[Historial médico]**", divider='green')
+            st.subheader("**:blue[[Historial médico]]**", divider='green')
             medical_history_view(id_user)
                 
     cursor.close()
