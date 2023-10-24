@@ -1,0 +1,4 @@
+-- BASE DE DATOS RDS --
+AWS RDS: admin
+Password: Medicina!2411
+Hostname: database-slsm.co79ojrcdoeo.us-east-1.rds.amazonaws.com
