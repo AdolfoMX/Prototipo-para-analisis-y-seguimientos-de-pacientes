@@ -91,6 +91,8 @@ def general_data_view(id_user):
                                 '17': 'notas'
                                }, inplace=True)
 
+
+
     #Muestra el contenido de la tabla 1 (Hojas de evolución médico)
     #st.write(df_result)
 
@@ -127,24 +129,28 @@ def general_data_view(id_user):
     #Muestra el contenido de la tabla 2 (Avances_usuarios)
     #st.write(df_result2)
 
+    print(df_result2.info())
+
     horas_sueno, min_ejercicio = st.columns(2)
 
     #Gráfico de horas de sueño
     horas_sueno.write("##### Horas de sueño")
-    with horas_sueno: 
-        st.line_chart(data=df_result, x='fecha_registro', y='horas_sueno', color='#8C6FF4')
+    with horas_sueno:
+        chart_sueno = px.scatter(df_result, x='fecha_registro', y='horas_sueno', width=300, height=300) 
+        st.plotly_chart(chart_sueno)
+        #st.line_chart(data=df_result, x='fecha_registro', y='horas_sueno', color='#8C6FF4')
 
     #Gráfico de mins al día de ejercicio
     min_ejercicio.write("##### Minutos al día de ejercicio")
     with min_ejercicio: 
-        st.line_chart(data=df_result, x='fecha_registro', y='ejercicio', color='#8C6FF4')
+        st.line_chart(data=df_result, x='fecha_registro', y='ejercicio', color='#8C6FF4', width=300, height=300)
 
     medidas, progreso_general = st.columns(2)
 
     #Gráfico de Índice de masa corporal
     medidas.write('#### Índice de masa corporal')
     with medidas:
-        fig_medidas = px.bar(df_result, x='fecha_registro', y='IMC', color_discrete_sequence=['#8C6FF4'])
+        fig_medidas = px.bar(df_result, x='fecha_registro', y='IMC', color_discrete_sequence=['#8C6FF4'], width=300, height=300)
         st.plotly_chart(fig_medidas)
 
 
@@ -168,6 +174,7 @@ def general_data_view(id_user):
                                       y=progress_patient.index,
                                       orientation="h",
                                       color_discrete_sequence=["#8C6FF4"] *len(progress_patient),
+                                      width=400, height=300,
                                       )
         st.plotly_chart(fig_progreso_general)
 
@@ -188,10 +195,8 @@ def progress_visual_patient(id_user):
     
     if not result:
         st.warning("El usuario no se encuentra registrado", icon="⚠️")
-    else:        
-        with st.expander(f"**Ver información del paciente**"):
-            
-            general_data_view(id_user)
+    else:            
+        general_data_view(id_user)
                 
     cursor.close()
     cnx.close()
