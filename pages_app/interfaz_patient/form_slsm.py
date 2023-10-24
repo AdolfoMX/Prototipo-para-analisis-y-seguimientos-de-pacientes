@@ -393,11 +393,13 @@ def form_main():
                             
                             cursor.close()
                             cnx.close()
+
+                            st.success('La información ha sido registrada!', icon="✅")
                         else:
                             cursor.close()
                             cnx.close()
                             
-                            st.success('La información ha sido registrada!', icon="✅")
+                            st.info('Datos anteriormente registrados!', icon="📋")
                     except:
                         st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
                         
