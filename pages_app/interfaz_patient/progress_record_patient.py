@@ -326,26 +326,3 @@ def progress_record_patient_main():
                         
         if selectd == "Mis notas":
             patient_notes(st.session_state['id_user'])
-
-"""
-date_now,
-quest1_sec1,
-notes1_sec1,
-notes2_sec1,
-quest1_sec2,
-notes1_sec2,
-notes2_sec2,
-quest1_sec3,
-notes1_sec3,
-notes2_sec3,
-quest1_sec4,
-notes1_sec4,
-notes2_sec4,
-quest1_sec5,
-notes1_sec5,
-notes2_sec5,
-quest1_sec6,
-notes1_sec6,
-notes2_sec6,
-quest1_sec7
-"""

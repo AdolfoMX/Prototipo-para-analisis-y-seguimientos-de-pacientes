@@ -25,6 +25,34 @@ def check_users_db(full_name):
     return result
 
 
+def sentence_sql():
+    sql = """
+        INSERT INTO hojas_evolucion_medico (
+            id_usuario,
+            fecha_registro,
+            peso,
+            IMC,
+            grasa_viseral,
+            porcentaje_musculo,
+            abdomen,
+            ejercicio,
+            horas_sueno,
+            talla,
+            grasa_corporal,
+            edad_metabolica,
+            calorias,
+            glucosa,
+            comida_chatarra,
+            calidad_sueno,
+            notas
+        ) 
+        VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
+                %s,	%s,	%s,	%s,	%s,	%s,	%s	                   
+        )
+    """
+    return sql
+
+
 def form(id_user):
     with st.form("Hoja de evolución", clear_on_submit=True):
         current_date = dt.date.today()
@@ -47,14 +75,12 @@ def form(id_user):
             metabolic_age = st.number_input('Edad metabólica', min_value=1, max_value=100)
             calories = st.number_input('Consumo de calorias (kcal)', min_value=1000, max_value=3000)
             glucose = st.number_input('Glucosa en sangre (mg/dl)', min_value=1000, max_value=3000)
-            junk_food = st.selectbox('Apetito de comida chatarra', 
-                                                ('Mucha','Poca','Casi nada','Nada'))
-            sleep_quality = st.selectbox('Calidad de sueño', 
-                                                ('Bastante buena','Buena','Mala','Bastante mala'))
+            junk_food = st.selectbox('Apetito de comida chatarra', ('Mucha','Poca','Casi nada','Nada'), index=0)
+            sleep_quality = st.selectbox('Calidad de sueño', ('Bastante buena','Buena','Mala','Bastante mala'), index=0)
+            st.write(sleep_quality)
         notes = st.text_area('Notas de la sesión', max_chars=200)
 
         submitted = st.form_submit_button("Enviar")
-
         if submitted:
             try:
                 cnx = mysql.connector.connect(
@@ -65,59 +91,72 @@ def form(id_user):
                 )
 
                 cursor = cnx.cursor()
+                sql_last_date = f"SELECT * FROM hojas_evolucion_medico WHERE id_usuario = {id_user} AND fecha_registro = (SELECT MAX(fecha_registro) FROM hojas_evolucion_medico)"
                 
-                sql = """
-                INSERT INTO hojas_evolucion_medico (
-                    id_usuario,
-                    fecha_registro,
-                    peso,
-                    IMC,
-                    grasa_viseral,
-                    porcentaje_musculo,
-                    abdomen,
-                    ejercicio,
-                    horas_sueno,
-                    talla,
-                    grasa_corporal,
-                    edad_metabolica,
-                    calorias,
-                    glucosa,
-                    comida_chatarra,
-                    calidad_sueno,
-                    notas
-                ) 
-                VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
-                        %s,	%s,	%s,	%s,	%s,	%s,	%s	                   
-                )
-                """
-                
-                val = (
-                    id_user,
-                    current_date,
-                    weight,
-                    IMC,
-                    visceral_fat,
-                    muscle,
-                    abdomen,
-                    exercise,
-                    hours_sleep,
-                    size,
-                    body_fat,
-                    metabolic_age,
-                    calories,
-                    glucose,
-                    junk_food,
-                    sleep_quality,
-                    notes
-                )
-                
-                cursor.execute(sql, val)
-                cnx.commit()
-                
-                cursor.close()
-                cnx.close()
-                
-                st.success('La información ha sido registrada!', icon="✅")
+                cursor.execute(sql_last_date)
+                result_date = cursor.fetchall()
+
+                if not result_date:
+                    sql = sentence_sql()
+                    val = (
+                        id_user,
+                        current_date,
+                        weight,
+                        IMC,
+                        visceral_fat,
+                        muscle,
+                        abdomen,
+                        exercise,
+                        hours_sleep,
+                        size,
+                        body_fat,
+                        metabolic_age,
+                        calories,
+                        glucose,
+                        junk_food,
+                        sleep_quality,
+                        notes
+                    )
+
+                    cursor.execute(sql, val)
+                    cnx.commit()
+                    
+                    cursor.close()
+                    cnx.close()
+                    st.success('La información ha sido registrada!', icon="✅")
+                else:
+                    if result_date[0][2] == current_date:
+                        cursor.close()
+                        cnx.close()
+                        st.info("Sólo puede hacer un registro por día", icon="📋")
+                    else:
+                        sql = sentence_sql()
+                        val = (
+                            id_user,
+                            current_date,
+                            weight,
+                            IMC,
+                            visceral_fat,
+                            muscle,
+                            abdomen,
+                            exercise,
+                            hours_sleep,
+                            size,
+                            body_fat,
+                            metabolic_age,
+                            calories,
+                            glucose,
+                            junk_food,
+                            sleep_quality,
+                            notes
+                        )
+
+                        cursor.execute(sql, val)
+                        cnx.commit()
+                        
+                        cursor.close()
+                        cnx.close()
+                        st.success('La información ha sido registrada!', icon="✅")
             except:
                 st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
 
@@ -135,10 +174,9 @@ def evolution_sheets(id_user):
     
     cursor = cnx.cursor()
     sql = f"SELECT * FROM hojas_evolucion_medico WHERE id_usuario = {id_user} AND fecha_registro = '{date}'"
-    
     cursor.execute(sql)
     result = cursor.fetchall()
-    
+
     if not result:
         st.warning("No se encontraron registros de esa fecha", icon="⚠️")
     else:
@@ -303,7 +341,7 @@ def progress_record_main():
         if 'list_users' not in st.session_state:
             st.session_state['list_users'] = [""]
         
-        st.title("Registro de datos")
+        st.title("Registro y consulta de avances")
         
         col1, col2 = st.columns(2)        
         with col1:
@@ -346,88 +384,3 @@ def progress_record_main():
                 
             if selectd == "Notas del paciente":
                 patient_notes(id_user)
-
-"""
-                if submitted:
-                    cnx = mysql.connector.connect(
-                        user='root', 
-                        password='root',
-                        host='127.0.0.1',
-                        database='slsm_db'
-                    )
-
-                    cursor = cnx.cursor()
-                    
-                    sql = "
-                    INSERT INTO hojas_evolucion_medico (
-                        id_usuario,
-                        fecha_registro,
-                        peso,
-                        IMC,
-                        grasa_viseral,
-                        porcentaje_musculo,
-                        abdomen,
-                        ejercicio,
-                        horas_sueno,
-                        talla,
-                        grasa_corporal,
-                        edad_metabolica,
-                        calorias,
-                        glucosa,
-                        comida_chatarra,
-                        calidad_sueno,
-                        notas
-                    ) 
-                    VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
-                            %s,	%s,	%s,	%s,	%s,	%s,	%s	                   
-                    )
-                    "
-                
-                    
-                    val = (
-                        st.session_state['id_user'],
-                        date_now,
-                        weight,
-                        IMC,
-                        visceral_fat,
-                        muscle,
-                        abdomen,
-                        exercise,
-                        hours_sleep,
-                        size,
-                        body_fat,
-                        metabolic_age,
-                        calories,
-                        glucose,
-                        junk_food,
-                        sleep_quality,
-                        notes
-                    )
-                    
-                    cursor.execute(sql, val)
-                    cnx.commit()
-                    
-                    cursor.close()
-                    cnx.close()
-
-
-
-date_now,
-
-weight,
-IMC,
-visceral_fat,
-muscle,
-abdomen,
-exercise,
-hours_sleep,
-
-size,
-body_fat,
-metabolic_age,
-calories,
-glucose,
-junk_food,
-sleep_quality,
-notes
-"""
