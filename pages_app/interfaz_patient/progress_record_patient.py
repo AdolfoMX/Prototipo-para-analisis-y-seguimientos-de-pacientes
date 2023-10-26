@@ -4,6 +4,37 @@ from streamlit_option_menu import option_menu
 import mysql.connector
 import datetime as dt
 
+def sentence_sql():
+    sql = """INSERT INTO avances_usuarios (
+            id_usuario,
+            fecha_registro,
+            pregunta1_sec1,
+            notas1_sec1,
+            notas2_sec1,
+            pregunta1_sec2,
+            notas1_sec2,
+            notas2_sec2,
+            pregunta1_sec3,
+            notas1_sec3,
+            notas2_sec3,
+            pregunta1_sec4,
+            notas1_sec4,
+            notas2_sec4,
+            pregunta1_sec5,
+            notas1_sec5,
+            notas2_sec5,
+            pregunta1_sec6,
+            notas1_sec6,
+            notas2_sec6,
+            pregunta1_sec7
+        ) 
+        VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
+                %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s                
+        )
+    """
+    
+    return sql
+
 
 def progress_sheets(id_user):
 
@@ -123,71 +154,85 @@ def progress_sheets(id_user):
                 )
 
                 cursor = cnx.cursor()
+                sql_last_date = f"SELECT * FROM avances_usuarios AS a INNER JOIN(SELECT id_usuario, MAX(fecha_registro) AS fecha_max FROM hojas_evolucion_medico GROUP BY id_usuario) AS b ON a.id_usuario = b.id_usuario AND a.fecha_registro = b.fecha_max WHERE a.id_usuario = {id_user}"
                 
-                sql = """INSERT INTO avances_usuarios (
-                    id_usuario,
-                    fecha_registro,
-                    pregunta1_sec1,
-                    notas1_sec1,
-                    notas2_sec1,
-                    pregunta1_sec2,
-                    notas1_sec2,
-                    notas2_sec2,
-                    pregunta1_sec3,
-                    notas1_sec3,
-                    notas2_sec3,
-                    pregunta1_sec4,
-                    notas1_sec4,
-                    notas2_sec4,
-                    pregunta1_sec5,
-                    notas1_sec5,
-                    notas2_sec5,
-                    pregunta1_sec6,
-                    notas1_sec6,
-                    notas2_sec6,
-                    pregunta1_sec7
-                ) 
-                VALUES (%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,
-                        %s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s                
-                )
-                """
-
-                val = (
-                    id_user,
-                    current_date,
-                    quest1_sec1,
-                    notes1_sec1,
-                    notes2_sec1,
-                    quest1_sec2,
-                    notes1_sec2,
-                    notes2_sec2,
-                    quest1_sec3,
-                    notes1_sec3,
-                    notes2_sec3,
-                    quest1_sec4,
-                    notes1_sec4,
-                    notes2_sec4,
-                    quest1_sec5,
-                    notes1_sec5,
-                    notes2_sec5,
-                    quest1_sec6,
-                    notes1_sec6,
-                    notes2_sec6,
-                    quest1_sec7
-                )
+                cursor.execute(sql_last_date)
+                result_date = cursor.fetchall()
                 
-                cursor.execute(sql, val)
-                cnx.commit()
-                
-                cursor.close()
-                cnx.close()
-                st.success('La información ha sido registrada!', icon="✅")
+                if not result_date:
+                    sql = sentence_sql()
+                    val = (
+                        id_user,
+                        current_date,
+                        quest1_sec1,
+                        notes1_sec1,
+                        notes2_sec1,
+                        quest1_sec2,
+                        notes1_sec2,
+                        notes2_sec2,
+                        quest1_sec3,
+                        notes1_sec3,
+                        notes2_sec3,
+                        quest1_sec4,
+                        notes1_sec4,
+                        notes2_sec4,
+                        quest1_sec5,
+                        notes1_sec5,
+                        notes2_sec5,
+                        quest1_sec6,
+                        notes1_sec6,
+                        notes2_sec6,
+                        quest1_sec7
+                    )
+                    
+                    cursor.execute(sql, val)
+                    cnx.commit()
+                    
+                    st.success('La información ha sido registrada!', icon="✅")
+                    cursor.close()
+                    cnx.close()
+                else:
+                    if result_date[0][2] == current_date:
+                        cursor.close()
+                        cnx.close()
+                        st.info("Sólo puede hacer un registro por día", icon="📋")
+                    else:
+                        sql = sentence_sql()
+                        val = (
+                            id_user,
+                            current_date,
+                            quest1_sec1,
+                            notes1_sec1,
+                            notes2_sec1,
+                            quest1_sec2,
+                            notes1_sec2,
+                            notes2_sec2,
+                            quest1_sec3,
+                            notes1_sec3,
+                            notes2_sec3,
+                            quest1_sec4,
+                            notes1_sec4,
+                            notes2_sec4,
+                            quest1_sec5,
+                            notes1_sec5,
+                            notes2_sec5,
+                            quest1_sec6,
+                            notes1_sec6,
+                            notes2_sec6,
+                            quest1_sec7
+                        )
+                        
+                        cursor.execute(sql, val)
+                        cnx.commit()
+                        
+                        st.success('La información ha sido registrada!', icon="✅")
+                        cursor.close()
+                        cnx.close()
             except:
                 st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
 
 
 def patient_notes(id_user):
-
     cnx = mysql.connector.connect(
         user='root', 
         password='12345',

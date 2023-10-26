@@ -91,7 +91,7 @@ def form(id_user):
                 )
 
                 cursor = cnx.cursor()
-                sql_last_date = f"SELECT * FROM hojas_evolucion_medico WHERE id_usuario = {id_user} AND fecha_registro = (SELECT MAX(fecha_registro) FROM hojas_evolucion_medico)"
+                sql_last_date = f"SELECT * FROM hojas_evolucion_medico AS a INNER JOIN(SELECT id_usuario, MAX(fecha_registro) AS fecha_max FROM hojas_evolucion_medico GROUP BY id_usuario) AS b ON a.id_usuario = b.id_usuario AND a.fecha_registro = b.fecha_max WHERE a.id_usuario = {id_user}"
                 
                 cursor.execute(sql_last_date)
                 result_date = cursor.fetchall()
@@ -121,9 +121,9 @@ def form(id_user):
                     cursor.execute(sql, val)
                     cnx.commit()
                     
+                    st.success('La información ha sido registrada!', icon="✅")
                     cursor.close()
                     cnx.close()
-                    st.success('La información ha sido registrada!', icon="✅")
                 else:
                     if result_date[0][2] == current_date:
                         cursor.close()
@@ -154,9 +154,9 @@ def form(id_user):
                         cursor.execute(sql, val)
                         cnx.commit()
                         
+                        st.success('La información ha sido registrada!', icon="✅")
                         cursor.close()
                         cnx.close()
-                        st.success('La información ha sido registrada!', icon="✅")
             except:
                 st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
 
