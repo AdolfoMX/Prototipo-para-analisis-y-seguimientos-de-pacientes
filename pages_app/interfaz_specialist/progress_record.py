@@ -75,10 +75,12 @@ def form(id_user):
             metabolic_age = st.number_input('Edad metabólica', min_value=1, max_value=100)
             calories = st.number_input('Consumo de calorias (kcal)', min_value=1000, max_value=3000)
             glucose = st.number_input('Glucosa en sangre (mg/dl)', min_value=1000, max_value=3000)
-            junk_food = st.selectbox('Apetito de comida chatarra', ('Mucha','Poca','Casi nada','Nada'), index=0)
-            sleep_quality = st.selectbox('Calidad de sueño', ('Bastante buena','Buena','Mala','Bastante mala'), index=0)
+            junk_food = st.selectbox('Apetito de comida chatarra', ("Mucha","Poca", "Casi nada", "Nada"), index=0, placeholder="Seleciona una opcion")
+            st.write(junk_food)
+            sleep_quality = st.selectbox('Calidad de sueño', ("Bastante buena","Buena", "Mala", "Bastante mala"), index=0, placeholder="Seleciona una opcion")
             st.write(sleep_quality)
         notes = st.text_area('Notas de la sesión', max_chars=200)
+        st.write(notes)
 
         submitted = st.form_submit_button("Enviar")
         if submitted:
@@ -95,7 +97,10 @@ def form(id_user):
                 
                 cursor.execute(sql_last_date)
                 result_date = cursor.fetchall()
-
+                st.write(junk_food)
+                st.write(sleep_quality)
+                st.write(notes)
+                
                 if not result_date:
                     sql = sentence_sql()
                     val = (

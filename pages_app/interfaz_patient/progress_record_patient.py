@@ -37,7 +37,6 @@ def sentence_sql():
 
 
 def progress_sheets(id_user):
-
     with st.form("Historial médico", clear_on_submit=True):
         current_date = dt.date.today()
         date_now = st.text_input(":blue[Fecha de registro]", value=current_date.strftime("%d/%m/%y"), disabled=True)
