@@ -72,6 +72,7 @@ st-pages==0.4.4
 stack-data==0.6.2
 streamlit==1.26.0
 streamlit-authenticator==0.1.5
+streamlit-lottie==0.0.5
 streamlit-option-menu==0.3.6
 tenacity==8.2.3
 toml==0.10.2
