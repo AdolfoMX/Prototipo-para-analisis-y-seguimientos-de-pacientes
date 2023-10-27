@@ -122,11 +122,17 @@ CREATE TABLE hojas_evolucion_medico (
     edad_metabolica INT,
     calorias INT,
     glucosa FLOAT,
-    comida_chatarra VARCHAR(15),
-    calidad_sueno VARCHAR(15),
+    comida_chatarra VARCHAR(18),
+    calidad_sueno VARCHAR(18),
     notas VARCHAR(200),
     PRIMARY KEY(id_hojas)
 );
+
+ALTER TABLE hojas_evolucion_medico
+	MODIFY calidad_sueno VARCHAR(18),  comida_chatarra VARCHAR(18);
+    
+ALTER TABLE hojas_evolucion_medico
+	MODIFY comida_chatarra VARCHAR(18);
 
 CREATE TABLE avances_usuarios (
 	id_avance INT NOT NULL AUTO_INCREMENT,
@@ -181,6 +187,25 @@ SELECT * FROM hojas_evolucion_medico;
 
 SELECT * FROM hojas_evolucion_medico WHERE fecha_registro = '2023-10-16';
 
+SELECT MAX(fecha_registro) FROM hojas_evolucion_medico WHERE id_usuario = 6;
+SELECT * FROM hojas_evolucion_medico WHERE id_usuario = 6 AND fecha_registro = (SELECT MAX(fecha_registro) FROM	hojas_evolucion_medico);
+SELECT * 
+FROM hojas_evolucion_medico 
+WHERE id_usuario = 1 AND fecha_registro = (SELECT MAX(fecha_registro) FROM hojas_evolucion_medico);
+
+SELECT *
+FROM hojas_evolucion_medico AS a
+INNER JOIN
+(
+	SELECT  id_usuario, MAX(fecha_registro) AS fecha_max
+	FROM hojas_evolucion_medico
+	GROUP BY id_usuario
+) AS b 
+ON a.id_usuario = b.id_usuario AND a.fecha_registro = b.fecha_max
+WHERE a.id_usuario = 6;
+
+SELECT * FROM hojas_evolucion_medico AS a INNER JOIN(SELECT id_usuario, MAX(fecha_registro) AS fecha_max FROM hojas_evolucion_medico GROUP BY id_usuario) AS b ON a.id_usuario = b.id_usuario AND a.fecha_registro = b.fecha_max WHERE a.id_usuario = 6;
+ 
 SELECT 
 	id_usuario,
     nombre,
