@@ -172,6 +172,12 @@ VALUES ('Especialista'), ('Paciente');
 DELETE FROM `slsm_db`.`usuarios` WHERE (`id_usuario` = '7');
 */
 
+ALTER TABLE hojas_evolucion_medico
+	MODIFY calidad_sueno VARCHAR(18);
+    
+ALTER TABLE hojas_evolucion_medico
+	MODIFY comida_chatarra VARCHAR(18);
+
 /*Consulta*/
 SELECT * FROM usuarios;
 SELECT * FROM roles;
@@ -183,11 +189,35 @@ SELECT * FROM hojas_evolucion_medico;
 SELECT * FROM usuarios WHERE id_rol = 1;
 SELECT * FROM usuarios WHERE id_rol = 2;
 
-
 SELECT * FROM hojas_evolucion_medico WHERE fecha_registro = '2023-10-16';
 
 SELECT DISTINCT EXTRACT(YEAR FROM fecha_registro) FROM avances_usuarios;
 
+SELECT DISTINCT EXTRACT(YEAR FROM a.fecha_registro), EXTRACT(YEAR FROM b.fecha_registro)
+FROM avances_usuarios AS a
+INNER JOIN hojas_evolucion_medico AS b;
+
+SELECT MAX(fecha_registro) FROM hojas_evolucion_medico WHERE id_usuario = 6;
+
+SELECT * FROM hojas_evolucion_medico WHERE id_usuario = 6 AND fecha_registro = (SELECT MAX(fecha_registro) FROM	hojas_evolucion_medico);
+
+SELECT * 
+FROM hojas_evolucion_medico 
+WHERE id_usuario = 1 AND fecha_registro = (SELECT MAX(fecha_registro) FROM hojas_evolucion_medico);
+
+SELECT *
+FROM hojas_evolucion_medico AS a
+INNER JOIN
+(
+	SELECT  id_usuario, MAX(fecha_registro) AS fecha_max
+	FROM hojas_evolucion_medico
+	GROUP BY id_usuario
+) AS b 
+ON a.id_usuario = b.id_usuario AND a.fecha_registro = b.fecha_max
+WHERE a.id_usuario = 6;
+
+SELECT * FROM hojas_evolucion_medico AS a INNER JOIN(SELECT id_usuario, MAX(fecha_registro) AS fecha_max FROM hojas_evolucion_medico GROUP BY id_usuario) AS b ON a.id_usuario = b.id_usuario AND a.fecha_registro = b.fecha_max WHERE a.id_usuario = 6;
+ 
 SELECT 
 	id_usuario,
     nombre,
