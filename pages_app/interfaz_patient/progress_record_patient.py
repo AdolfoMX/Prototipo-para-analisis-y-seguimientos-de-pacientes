@@ -188,6 +188,7 @@ def progress_sheets(id_user):
                     cnx.commit()
                     
                     st.success('La información ha sido registrada!', icon="✅")
+                    st.toast('La información ha sido registrada!', icon="✅")
                     cursor.close()
                     cnx.close()
                 else:
@@ -195,6 +196,7 @@ def progress_sheets(id_user):
                         cursor.close()
                         cnx.close()
                         st.info("Sólo puede hacer un registro por día", icon="📋")
+                        st.toast("Sólo puede hacer un registro por día", icon="📋")
                     else:
                         sql = sentence_sql()
                         val = (
@@ -225,10 +227,12 @@ def progress_sheets(id_user):
                         cnx.commit()
                         
                         st.success('La información ha sido registrada!', icon="✅")
+                        st.toast('La información ha sido registrada!', icon="✅")
                         cursor.close()
                         cnx.close()
             except:
                 st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
+                st.toast("Por favor asegurese de llenar todos los campos", icon="⚠️")
 
 
 def patient_notes(id_user):

@@ -251,6 +251,7 @@ class Authenticate:
                     # verifica que los campos esten llenos
                     if "" in data_form:
                         st.error("Por favor asegurese de llenar todos los campos", icon="⛔")
+                        st.toast("Por favor asegurese de llenar todos los campos", icon="⛔")
                     else:
                         
                         # verifica si las contraseñas son iguales
@@ -262,18 +263,16 @@ class Authenticate:
                                 with st.empty():
                                     st.success("Felicidades, el registro ha sido exítoso!", icon="✅")
                                     st.toast("Felicidades, el registro ha sido exítoso!", icon="✅")
-                                    time.sleep(1)
                                 
                             else:
                                 with st.empty():
                                     st.error("Esta cuenta ya existe con el mismo correo", icon="⛔")
                                     st.toast("Esta cuenta ya existe con el mismo correo", icon="⛔")
-                                    time.sleep(1)
+                                    
                         else:
                             with st.empty():
                                 st.error("Por favor asegurese de que la contraseña coincida", icon="⛔")
                                 st.toast("Por favor asegurese de que la contraseña coincida", icon="⛔")
-                                time.sleep(1)
 
 
     def form_login_main(self, form_name, location='main'):
