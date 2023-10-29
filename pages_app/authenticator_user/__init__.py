@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import streamlit as st
 import extra_streamlit_components as stx
 import streamlit.components.v1 as components
+import time
 
 class Hasher:
     def __init__(self, passwords):
@@ -258,12 +259,22 @@ class Authenticate:
                                 
                                 # registro de datos a la base de datos
                                 self.add_user_db(name, last_name, email, rol, password)
-                                st.success("Felicidades, el registro ha sido exítoso!", icon="✅")
+                                with st.empty():
+                                    st.success("Felicidades, el registro ha sido exítoso!", icon="✅")
+                                    st.toast("Felicidades, el registro ha sido exítoso!", icon="✅")
+                                    time.sleep(1)
                                 
                             else:
-                                st.error("Esta cuenta ya existe con el mismo correo", icon="⛔")
+                                with st.empty():
+                                    st.error("Esta cuenta ya existe con el mismo correo", icon="⛔")
+                                    st.toast("Esta cuenta ya existe con el mismo correo", icon="⛔")
+                                    time.sleep(1)
                         else:
-                            st.error("Por favor asegurese de que la contraseña coincida", icon="⛔")
+                            with st.empty():
+                                st.error("Por favor asegurese de que la contraseña coincida", icon="⛔")
+                                st.toast("Por favor asegurese de que la contraseña coincida", icon="⛔")
+                                time.sleep(1)
+
 
     def form_login_main(self, form_name, location='main'):
         

@@ -98,17 +98,19 @@ def general_data_view(id_user):
                                     '17': 'notas'
                                 }, inplace=True)
 
+        df_result['fecha_registro'] = pd.to_datetime(df_result['fecha_registro'], format="%d/%m/%Y")
+        
         #Gráfico de horas de sueño
         horas_sueno.write("##### Horas de sueño")
         with horas_sueno:
             chart_sueno = px.line(df_result, x='fecha_registro', y='horas_sueno', width=300, height=300, markers=True) 
             st.plotly_chart(chart_sueno)
             #st.line_chart(data=df_result, x='fecha_registro', y='horas_sueno', color='#8C6FF4')
-
+            
         #Gráfico de mins al día de ejercicio
         min_ejercicio.write("##### Minutos al día de ejercicio")
         with min_ejercicio:
-            chart_ejercicio = px.line(df_result, x='fecha_registro', y='ejercicio', width=300, height=300, markers=True)
+            chart_ejercicio = px.line(df_result, x='fecha_registro', y='ejercicio', width=300, height=300, markers=True, template="seaborn")
             st.plotly_chart(chart_ejercicio)
             #st.line_chart(data=df_result, x='fecha_registro', y='ejercicio', color='#8C6FF4', width=300, height=300)
         
