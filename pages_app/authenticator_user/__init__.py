@@ -142,7 +142,7 @@ class Authenticate:
     def check_user_db(self, email):
         cnx = mysql.connector.connect(
             user='root', 
-            password='12345',
+            password='root',
             host='127.0.0.1',
             database='slsm_db'
         )
@@ -166,7 +166,7 @@ class Authenticate:
     def add_user_db(self, name, last_name, email, rol, password):
         cnx = mysql.connector.connect(
             user='root', 
-            password='12345',
+            password='root',
             host='127.0.0.1',
             database='slsm_db'
         )
@@ -191,7 +191,7 @@ class Authenticate:
     def check_email_db(self, email):
         cnx = mysql.connector.connect(
             user='root', 
-            password='12345',
+            password='root',
             host='127.0.0.1',
             database='slsm_db'
         )
@@ -251,7 +251,6 @@ class Authenticate:
                     # verifica que los campos esten llenos
                     if "" in data_form:
                         st.error("Por favor asegurese de llenar todos los campos", icon="⛔")
-                        st.toast("Por favor asegurese de llenar todos los campos", icon="⛔")
                     else:
                         
                         # verifica si las contraseñas son iguales
@@ -263,16 +262,18 @@ class Authenticate:
                                 with st.empty():
                                     st.success("Felicidades, el registro ha sido exítoso!", icon="✅")
                                     st.toast("Felicidades, el registro ha sido exítoso!", icon="✅")
+                                    time.sleep(1)
                                 
                             else:
                                 with st.empty():
                                     st.error("Esta cuenta ya existe con el mismo correo", icon="⛔")
                                     st.toast("Esta cuenta ya existe con el mismo correo", icon="⛔")
-                                    
+                                    time.sleep(1)
                         else:
                             with st.empty():
                                 st.error("Por favor asegurese de que la contraseña coincida", icon="⛔")
                                 st.toast("Por favor asegurese de que la contraseña coincida", icon="⛔")
+                                time.sleep(1)
 
 
     def form_login_main(self, form_name, location='main'):

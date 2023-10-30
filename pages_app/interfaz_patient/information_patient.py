@@ -4,7 +4,7 @@ import mysql.connector
 def general_data_view(id_user):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -40,7 +40,7 @@ def general_data_view(id_user):
 def medical_history_view(id_user):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -218,7 +218,7 @@ def information_patient_main():
             """, unsafe_allow_html=True
         )
         
-        st.title("Perfil")
+        st.title(":blue[Perfil]")
         
         with st.expander("**Datos generales**"):
             general_data_view(st.session_state['id_user'])

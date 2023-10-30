@@ -21,16 +21,17 @@ st.set_page_config(
 
 authenticator = stauth.Authenticate([""], [""], [""], "SLSM app", "auth", cookie_expiry_days=2)
 
+#time.sleep(0.2)
+
 # Inicio de sesión
 name, authentication_status, username, rol_login = authenticator.login("Inicio de sesión", "main")
 
 # Verificación
 if st.session_state['authentication_status']:  
+    time.sleep(0.08)
     
     if "rol_logout" not in st.session_state:
         st.session_state["rol_logout"] = authenticator
-    
-    time.sleep(0.08)
     
     if rol_login == 1:
         # Interfaz del especialista
@@ -41,9 +42,7 @@ if st.session_state['authentication_status']:
         patient_view_main()
     
 elif st.session_state['authentication_status'] is False:
-    with st.empty():
-        st.error('Usuario/contraseña es incorrecto', icon="⛔")
-        st.toast('Usuario/contraseña es incorrecto', icon="⛔")
+    st.error('Usuario/contraseña es incorrecto', icon="⛔")
     
     # Registro de usuario
     authenticator.register_user()

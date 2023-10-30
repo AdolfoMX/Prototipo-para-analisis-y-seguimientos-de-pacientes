@@ -8,7 +8,7 @@ import re
 def check_users_db(full_name):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -28,7 +28,7 @@ def check_users_db(full_name):
 def general_data_view(id_user):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -64,7 +64,7 @@ def general_data_view(id_user):
 def medical_history_view(id_user):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -224,7 +224,7 @@ def medical_history_view(id_user):
 def patient_notes(id_user):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -240,10 +240,10 @@ def patient_notes(id_user):
     else:        
         with st.expander(f"**Ver información del paciente**"):
             
-            st.subheader("**:blue[[Datos generales]]**", divider='green')
+            st.subheader("**:blue[[Datos generales]]**", divider='red')
             general_data_view(id_user)
             
-            st.subheader("**:blue[[Historial médico]]**", divider='green')
+            st.subheader("**:blue[[Historial médico]]**", divider='red')
             medical_history_view(id_user)
                 
     cursor.close()
@@ -266,7 +266,7 @@ def patients_main():
             """, unsafe_allow_html=True
         )
         
-        st.title("Búsqueda de pacientes ")
+        st.title(":blue[Búsqueda de pacientes]")
         
         if 'list_search_users' not in st.session_state:
             st.session_state['list_search_users'] = [""]
@@ -292,7 +292,7 @@ def patients_main():
             selectd_user = st.selectbox("Paciente(s)", st.session_state['list_search_users'])
             st.info(f"[Selección]: {selectd_user}", icon="📋")
             
-        st.subheader("", divider="orange")
+        st.subheader("", divider="red")
         
         if selectd_user != "":
             id_user = re.search(r"\d+", selectd_user)

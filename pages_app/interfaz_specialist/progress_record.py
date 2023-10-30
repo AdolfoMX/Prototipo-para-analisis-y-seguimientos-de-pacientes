@@ -8,7 +8,7 @@ import re
 def check_users_db(full_name):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -87,7 +87,7 @@ def form(id_user):
             try:
                 cnx = mysql.connector.connect(
                     user='root', 
-                    password='12345',
+                    password='root',
                     host='127.0.0.1',
                     database='slsm_db'
                 )
@@ -127,7 +127,6 @@ def form(id_user):
                     cnx.commit()
                     
                     st.success('La información ha sido registrada!', icon="✅")
-                    st.toast('La información ha sido registrada!', icon="✅")
                     cursor.close()
                     cnx.close()
                 else:
@@ -135,7 +134,6 @@ def form(id_user):
                         cursor.close()
                         cnx.close()
                         st.info("Sólo puede hacer un registro por día", icon="📋")
-                        st.toast("Sólo puede hacer un registro por día", icon="📋")
                     else:
                         sql = sentence_sql()
                         val = (
@@ -162,18 +160,16 @@ def form(id_user):
                         cnx.commit()
                         
                         st.success('La información ha sido registrada!', icon="✅")
-                        st.toast('La información ha sido registrada!', icon="✅")
                         cursor.close()
                         cnx.close()
             except:
                 st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
-                st.toast("Por favor asegurese de llenar todos los campos", icon="⚠️")
 
 
 def evolution_sheets(id_user):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -190,7 +186,7 @@ def evolution_sheets(id_user):
         st.warning("No se encontraron registros de esa fecha", icon="⚠️")
     else:
         for i in range(len(result)):
-            st.subheader(f":date: {i+1}. Fecha: :blue[{result[i][2]}]", divider='green')
+            st.subheader(f":date: {i+1}. Fecha: :blue[{result[i][2]}]", divider='red')
             
             with st.expander("**Ver hoja**..."):
                 col1_sec1, col2_sec1 = st.columns(2)
@@ -222,7 +218,7 @@ def evolution_sheets(id_user):
 def patient_notes(id_user):
     cnx = mysql.connector.connect(
         user='root', 
-        password='12345',
+        password='root',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -240,7 +236,7 @@ def patient_notes(id_user):
         st.warning("No se encontraron registros de esa fecha", icon="⚠️")
     else:
         for i in range(len(result)):
-            st.subheader(f":date: {i+1}. Fecha: :blue[{result[i][2]}]", divider='green')
+            st.subheader(f":date: {i+1}. Fecha: :blue[{result[i][2]}]", divider='red')
             
             with st.expander("**Ver hoja**..."):
             
@@ -350,7 +346,7 @@ def progress_record_main():
         if 'list_users' not in st.session_state:
             st.session_state['list_users'] = [""]
         
-        st.title("Registro y consulta de avances")
+        st.title(":blue[Registro y consulta de avances]")
         
         col1, col2 = st.columns(2)        
         with col1:
@@ -373,7 +369,7 @@ def progress_record_main():
             selectd_user = st.selectbox("Paciente(s)", st.session_state['list_users'])
             st.info(f"[Selección]: {selectd_user}", icon="📋")
             
-        st.subheader("", divider="orange")
+        st.subheader("", divider="red")
         
         if selectd_user != "":
             id_user = re.search(r"\d+", selectd_user)

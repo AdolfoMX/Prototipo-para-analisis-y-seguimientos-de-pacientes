@@ -7,7 +7,6 @@ from pages_app.interfaz_patient.information_patient import information_patient_m
 from pages_app.interfaz_patient.visualizations_patient import visualizations_patient_main
 from pages_app.interfaz_patient.progress_record_patient import progress_record_patient_main
 
-
 def patient_view_main():
     with st.sidebar:
         
@@ -28,7 +27,7 @@ def patient_view_main():
             """, unsafe_allow_html=True
         )
         
-        st.image(".\\images\\chat.png", width=180, use_column_width=False)
+        st.image(".\\images\\icon_patient.png", width=180, use_column_width=False)
         
         selectd = option_menu(
             menu_title="Menú principal",

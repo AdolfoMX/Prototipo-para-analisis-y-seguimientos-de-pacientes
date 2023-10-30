@@ -18,7 +18,7 @@ def form_main():
             """, unsafe_allow_html=True
         )
         
-        st.title("Registro de datos")
+        st.title(":blue[Registro de datos]")
         
         selectd = option_menu(
             menu_title=None,
@@ -198,7 +198,7 @@ def form_main():
                     try:
                         cnx = mysql.connector.connect(
                             user='root', 
-                            password='12345',
+                            password='root',
                             host='127.0.0.1',
                             database='slsm_db'
                         )
@@ -395,14 +395,11 @@ def form_main():
                             cnx.close()
 
                             st.success('La información ha sido registrada!', icon="✅")
-                            st.toast('La información ha sido registrada!', icon="✅")
                         else:
                             cursor.close()
                             cnx.close()
                             
                             st.info('Datos anteriormente registrados!', icon="📋")
-                            st.toast('Datos anteriormente registrados!', icon="📋")
                     except:
                         st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
-                        st.toast("Por favor asegurese de llenar todos los campos", icon="⚠️")
                         
