@@ -18,7 +18,7 @@ def form_main():
             """, unsafe_allow_html=True
         )
         
-        st.title(":blue[Registro de datos]")
+        st.title("Registro de datos")
         
         selectd = option_menu(
             menu_title=None,
@@ -183,11 +183,11 @@ def form_main():
 
                 with col1_ext:
                     quest1_ext = st.radio("¿Su salud actual le limita hacer su vida normal?", options=["Sí", "No"], horizontal=False)
-                    quest3_ext = st.radio("¿Cuánta confianza tiene de recuperar su buena salud?", options=["Sí", "No"], horizontal=False)
-                    quest5_ext = st.radio("¿Cuáles serían las 5 causas por las que podría fallar de la pregunta anterior?", options=["Sí", "No"], horizontal=False)
+                    quest3_ext = st.text_area("¿Cuánta confianza tiene de recuperar su buena salud?", max_chars=200)
+                    quest5_ext = st.text_area("¿Cuáles serían las 5 causas por las que podría fallar de la pregunta anterior?", max_chars=200)
 
                 with col2_ext:
-                    quest2_ext = st.text_area("De la pregunta anterior describe el porque", max_chars=200)
+                    quest2_ext = st.text_area("De la pregunta anterior (salud actual) describe el porque", max_chars=200)
                     quest4_ext = st.text_area("¿Qué fortalezas personales o familiares usará en su propósito de salud?", max_chars=200)
                     quest6_ext = st.multiselect("Seleccione sus 3 propósitos más importantes", ["Mejor nutrición", "Peso ideal", "Dormir mejor", "Dejar algún vicio", "Salud emocional", "Mejor vida social"], max_selections=3)
 
@@ -198,7 +198,7 @@ def form_main():
                     try:
                         cnx = mysql.connector.connect(
                             user='root', 
-                            password='root',
+                            password='12345',
                             host='127.0.0.1',
                             database='slsm_db'
                         )
@@ -395,11 +395,14 @@ def form_main():
                             cnx.close()
 
                             st.success('La información ha sido registrada!', icon="✅")
+                            st.toast('La información ha sido registrada!', icon="✅")
                         else:
                             cursor.close()
                             cnx.close()
                             
                             st.info('Datos anteriormente registrados!', icon="📋")
+                            st.toast('Datos anteriormente registrados!', icon="📋")
                     except:
                         st.warning("Por favor asegurese de llenar todos los campos", icon="⚠️")
-                        
+                        st.toast("Por favor asegurese de llenar todos los campos", icon="⚠️")
+                                                

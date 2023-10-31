@@ -210,8 +210,8 @@ def medical_history_view(id_user):
 
         with col1_ext:
             st.text_input("¿Su salud actual le limita hacer su vida normal?", value=result[0][75], disabled=True)
-            st.text_input("¿Cuánta confianza tiene de recuperar su buena salud?", value=result[0][77], disabled=True)
-            st.text_input("¿Cuáles serían las 5 causas por las que podría fallar de la pregunta anterior?", value=result[0][79], disabled=True)
+            st.text_area("¿Cuánta confianza tiene de recuperar su buena salud?", value=result[0][77], disabled=True)
+            st.text_area("¿Cuáles serían las 5 causas por las que podría fallar de la pregunta anterior?", value=result[0][79], disabled=True)
 
         with col2_ext:
             st.text_area("De la pregunta anterior describe el porque", value=result[0][76], disabled=True)
