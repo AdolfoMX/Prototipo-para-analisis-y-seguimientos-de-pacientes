@@ -88,7 +88,7 @@ CREATE TABLE historiales_medicos (
     pregunta6_sec5 VARCHAR(2),
     pregunta7_sec5 VARCHAR(40),
     pregunta1_sec6 INT,
-    pregunta2_sec6 VARCHAR(40),
+    pregunta2_sec6 VARCHAR(80),
     pregunta3_sec6 VARCHAR(2),
     pregunta4_sec6 VARCHAR(2),
     pregunta5_sec6 VARCHAR(2),
@@ -99,12 +99,24 @@ CREATE TABLE historiales_medicos (
     pregunta4_sec7 VARCHAR(2),
     pregunta1_ext VARCHAR(2),
     pregunta2_ext VARCHAR(200),
-    pregunta3_ext VARCHAR(2),
+    pregunta3_ext VARCHAR(200),
     pregunta4_ext VARCHAR(200),
-    pregunta5_ext VARCHAR(2),
-    pregunta6_ext VARCHAR(40),
+    pregunta5_ext VARCHAR(200),
+    pregunta6_ext VARCHAR(80),
     PRIMARY KEY(id_historial) 
 );
+
+ALTER TABLE historiales_medicos
+	MODIFY pregunta3_ext VARCHAR(200);
+
+ALTER TABLE historiales_medicos
+	MODIFY pregunta5_ext VARCHAR(200);
+
+ALTER TABLE historiales_medicos
+	MODIFY pregunta2_sec6 VARCHAR(200);
+    
+ALTER TABLE historiales_medicos
+	MODIFY pregunta6_ext VARCHAR(200);
 
 CREATE TABLE hojas_evolucion_medico (
 	id_hojas INT NOT NULL AUTO_INCREMENT,
