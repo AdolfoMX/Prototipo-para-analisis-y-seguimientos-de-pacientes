@@ -8,8 +8,8 @@ import plotly.express as px
 def general_data_view(id_user):
     
     cnx = mysql.connector.connect(
-        user='root', 
-        password='root',
+        user='admin', 
+        password='Medicina!2411',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -158,8 +158,8 @@ def general_data_view(id_user):
 
 def progress_visual_patient(id_user):
     cnx = mysql.connector.connect(
-        user='root', 
-        password='root',
+        user='admin', 
+        password='Medicina!2411',
         host='127.0.0.1',
         database='slsm_db'
     )
