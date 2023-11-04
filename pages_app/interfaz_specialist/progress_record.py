@@ -55,9 +55,9 @@ def sentence_sql():
 
 def form(id_user):
     with st.form("Hoja de evolución", clear_on_submit=True):
-        #current_date = dt.date.today()
-        current_date = dt.datetime.strptime('07/10/2023', '%d/%m/%Y')
-        current_date = current_date.date()
+        current_date = dt.date.today()
+        #current_date = dt.datetime.strptime('07/10/2023', '%d/%m/%Y')
+        #current_date = current_date.date()
         #st.write(current_date)
         date_now = st.text_input(":blue[Fecha de registro]", value=current_date.strftime("%d/%m/%y"), disabled=True)
 
