@@ -7,8 +7,8 @@ import re
 
 def check_users_db(full_name):
     cnx = mysql.connector.connect(
-        user='root', 
-        password='root',
+        user='admin', 
+        password='Medicina!2411',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -86,8 +86,8 @@ def form(id_user):
         if submitted:
             try:
                 cnx = mysql.connector.connect(
-                    user='root', 
-                    password='root',
+                    user='admin', 
+                    password='Medicina!2411',
                     host='127.0.0.1',
                     database='slsm_db'
                 )
@@ -168,8 +168,8 @@ def form(id_user):
 
 def evolution_sheets(id_user):
     cnx = mysql.connector.connect(
-        user='root', 
-        password='root',
+        user='admin', 
+        password='Medicina!2411',
         host='127.0.0.1',
         database='slsm_db'
     )
@@ -217,8 +217,8 @@ def evolution_sheets(id_user):
 
 def patient_notes(id_user):
     cnx = mysql.connector.connect(
-        user='root', 
-        password='root',
+        user='admin', 
+        password='Medicina!2411',
         host='127.0.0.1',
         database='slsm_db'
     )
