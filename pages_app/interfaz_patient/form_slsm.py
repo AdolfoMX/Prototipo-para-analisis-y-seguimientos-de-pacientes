@@ -197,8 +197,8 @@ def form_main():
                 if submitted:
                     try:
                         cnx = mysql.connector.connect(
-                            user='root', 
-                            password='12345',
+                            user='admin', 
+                            password='Medicina!2411',
                             host='127.0.0.1',
                             database='slsm_db'
                         )
