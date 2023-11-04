@@ -141,8 +141,8 @@ class Authenticate:
     
     def check_user_db(self, email):
         cnx = mysql.connector.connect(
-            user='root', 
-            password='root',
+            user='admin', 
+            password='Medicina!2411',
             host='127.0.0.1',
             database='slsm_db'
         )
@@ -165,8 +165,8 @@ class Authenticate:
         
     def add_user_db(self, name, last_name, email, rol, password):
         cnx = mysql.connector.connect(
-            user='root', 
-            password='root',
+            user='admin', 
+            password='Medicina!2411',
             host='127.0.0.1',
             database='slsm_db'
         )
@@ -190,8 +190,8 @@ class Authenticate:
         
     def check_email_db(self, email):
         cnx = mysql.connector.connect(
-            user='root', 
-            password='root',
+            user='admin', 
+            password='Medicina!2411',
             host='127.0.0.1',
             database='slsm_db'
         )
