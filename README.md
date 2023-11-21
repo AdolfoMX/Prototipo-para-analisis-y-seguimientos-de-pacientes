@@ -8,3 +8,37 @@ Universitarios de la carrera de Ingeniería en Datos e Inteligencia Organizacion
 * Dolores Amayrani Gómez Hernández
 * Karla Guadalupe Salinas Guinto
 * Adolfo Tun Dzul
+
+## 1. Inicio de sesión
+<p align="center">
+  <img src="images/img_i.png"> <br><br>
+  <img src="images/img_p.png"> <br><br>
+  <img src="images/img_s.png"> <br><br>
+</p>
+
+## 2. Interfaz paciente
+<p align="center">
+  <img src="images/interfaz_patient_img/img1_p.png"> <br><br>
+  <img src="images/interfaz_patient_img/img2_p.png"> <br><br>
+  <img src="images/interfaz_patient_img/img3_p.png"> <br><br>
+  <img src="images/interfaz_patient_img/img4_p.png"> <br><br>
+  <img src="images/interfaz_patient_img/img5_p.png"> <br><br>
+  <img src="images/interfaz_patient_img/img5.2_p.png"> <br><br>
+  <img src="images/interfaz_patient_img/img6_p.png"> <br><br>
+</p>
+
+## 3. Interfaz especialista
+<p align="center">
+  <img src="images/interfaz_specialist_img/img1_s.png"> <br><br>
+  <img src="images/interfaz_specialist_img/img2_s.png"> <br><br>
+  <img src="images/interfaz_specialist_img/img3_s.png"> <br><br>
+  <img src="images/interfaz_specialist_img/img3.2_s.png"> <br><br>
+  <img src="images/interfaz_specialist_img/img3.3_s.png"> <br><br>
+  <img src="images/interfaz_specialist_img/img3.4_s.png"> <br><br>
+  <img src="images/interfaz_specialist_img/img4_s.png"> <br><br>
+</p>
+
+## 4. Visualización de datos
+<p align="center">
+  <img src="images/img_v.png"> <br><br>
+</p>
