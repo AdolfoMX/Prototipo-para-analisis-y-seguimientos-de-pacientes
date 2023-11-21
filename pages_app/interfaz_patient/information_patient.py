@@ -218,7 +218,7 @@ def information_patient_main():
             """, unsafe_allow_html=True
         )
         
-        st.title("Perfil")
+        st.title(":blue[Perfil]")
         
         with st.expander("**Datos generales**"):
             general_data_view(st.session_state['id_user'])
